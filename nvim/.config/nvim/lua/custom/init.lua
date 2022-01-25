@@ -34,6 +34,19 @@ customPlugins.add(function(use)
          require("neoscroll").setup()
       end,
     }
+   use {
+     "hrsh7th/nvim-compe",
+      opt = true,
+      event = 'InsertEnter',
+      after = 'nvim-lspconfig',
+   }
+
+   use {
+     'tzachar/compe-tabnine', 
+      opt = true,
+      after = 'nvim-compe',
+      run = './install.sh'
+    }
     
 end)
 
