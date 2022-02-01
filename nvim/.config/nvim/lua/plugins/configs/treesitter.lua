@@ -6,8 +6,22 @@ end
 
 ts_config.setup {
    ensure_installed = {
+      "bash",
+      "dot",
+      "html",
+      "json",
       "lua",
+      "make",
+      "markdown",
+      "query",
+      "rust",
+      "scss",
+      "toml",
+      "tsx",
+      "typescript",
       "vim",
+      "vue",
+      "yaml"
    },
    highlight = {
       enable = true,

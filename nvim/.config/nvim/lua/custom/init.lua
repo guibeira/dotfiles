@@ -21,7 +21,7 @@ customPlugins.add(function(use)
 
     use { "ruanyl/vim-gh-line" }
 
-    use { "github/copilot.vim" }
+    -- use { "github/copilot.vim" }
 
     use { "averms/black-nvim" }
     use {
@@ -47,7 +47,10 @@ customPlugins.add(function(use)
       after = 'nvim-compe',
       run = './install.sh'
     }
-    
+    use {
+    'glacambre/firenvim',
+    run = function() vim.fn['firenvim#install'](0) end 
+    }
 end)
 
 -- NOTE: we heavily suggest using Packer's lazy loading (with the 'event','cmd' fields)
