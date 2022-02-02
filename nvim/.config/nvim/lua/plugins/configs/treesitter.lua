@@ -9,6 +9,7 @@ ts_config.setup {
       "bash",
       "dot",
       "html",
+      "javascript",
       "json",
       "lua",
       "make",
