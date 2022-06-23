@@ -12,6 +12,9 @@ an executable
 lvim.log.level = "warn"
 lvim.format_on_save = false
 lvim.colorscheme = "tokyonight"
+vim.opt.expandtab = false   -- mashgin
+-- vim.opt.smartindent  = false -- mashgin
+vim.opt.tabstop = 1 --mashgin
 vim.opt.spell = true
 vim.opt.spelllang = "en"
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
@@ -258,25 +261,8 @@ lvim.plugins = {
     "sindrets/diffview.nvim",
     event = "BufRead",
   },
+  {"github/copilot.vim"},
   { "folke/tokyonight.nvim" },
-  {
-    "gelfand/copilot.vim",
-    disable = not lvim.builtin.sell_soul_to_devel,
-    config = function()
-      -- copilot assume mapped
-      vim.g.copilot_assume_mapped = true
-      vim.g.copilot_no_tab_map = true
-    end
-  },
-  {
-    "hrsh7th/cmp-copilot",
-    disable = not lvim.builtin.sell_soul_to_devel,
-    config = function()
-      lvim.builtin.cmp.formatting.source_names["copilot"] = "(Cop)"
-      table.insert(lvim.builtin.cmp.sources, { name = "copilot" })
-    end
-  },
-
   { "editorconfig/editorconfig-vim" },
   {
     "simrat39/rust-tools.nvim",
@@ -301,6 +287,25 @@ lvim.plugins = {
     ft = { "rust", "rs" },
   },
 }
+
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+vim.g.copilot_tab_fallback = ""
+local cmp = require "cmp"
+lvim.builtin.cmp.mapping["<Tab>"] = function(fallback)
+  if cmp.visible() then
+    cmp.select_next_item()
+  else
+    local copilot_keys = vim.fn["copilot#Accept"]()
+    if copilot_keys ~= "" then
+      vim.api.nvim_feedkeys(copilot_keys, "i", true)
+    else
+      fallback()
+    end
+  end
+end
+
+
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
