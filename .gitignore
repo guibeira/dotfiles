@@ -1,2 +1,7 @@
 /tmux/.tmux/resurrect/*
 /lvim/.config/lvim/plugin/*
+plugin
+custom
+spell
+tmux/.tmux/resurrect/*
+tmux/.tmux/plugins/*
