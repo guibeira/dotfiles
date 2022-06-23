@@ -153,17 +153,15 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 -- Additional Plugins
 lvim.plugins = {
-  {
-    "folke/persistence.nvim",
-    event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    module = "persistence",
-    config = function()
-      require("persistence").setup {
-        dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
-        options = { "buffers", "curdir", "tabpages", "winsize" },
-      }
-    end,
-  },
+		{
+				'rmagatti/auto-session',
+				config = function()
+						require('auto-session').setup {
+								log_level = 'info',
+								auto_session_suppress_dirs = {'~/', '~/'}
+						}
+				end
+		},
   {
     "karb94/neoscroll.nvim",
     event = "WinScrolled",
