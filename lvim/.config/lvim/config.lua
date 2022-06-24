@@ -12,9 +12,9 @@ an executable
 lvim.log.level = "warn"
 lvim.format_on_save = false
 lvim.colorscheme = "tokyonight"
-vim.opt.expandtab = false   -- mashgin
+-- vim.opt.expandtab = false   -- mashgin
 -- vim.opt.smartindent  = false -- mashgin
-vim.opt.tabstop = 1 --mashgin
+-- vim.opt.tabstop = 1 --mashgin
 vim.opt.spell = true
 vim.opt.spelllang = "en"
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
