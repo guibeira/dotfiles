@@ -26,7 +26,9 @@ lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<S-T>"] = ":tabnew<cr>"
--- lvim.keys.normal_mode["<Leader>w"] = ":Telescope live_grep<cr>"
+lvim.keys.normal_mode["<S-H>"] = ":bp<cr>"
+lvim.keys.normal_mode["<S-L>"] = ":bn<cr>"
+lvim.keys.normal_mode["<Leader>o"] = ":Telescope live_grep<cr>"
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = false
 -- edit a default keymapping
@@ -88,7 +90,7 @@ lvim.builtin.treesitter.ensure_installed = {
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.highlight.enabled = true
+-- lvim.builtin.treesitter.highlight.enabled = false
 
 -- generic LSP settings
 
@@ -118,20 +120,20 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- end
 
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
--- local formatters = require "lvim.lsp.null-ls.formatters"
--- formatters.setup {
---   { command = "black", filetypes = { "python" } },
---   { command = "isort", filetypes = { "python" } },
---   {
---     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
---     command = "prettier",
---     ---@usage arguments to pass to the formatter
---     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
---     extra_args = { "--print-with", "100" },
---     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
---     filetypes = { "typescript", "typescriptreact" },
---   },
--- }
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  { command = "black", filetypes = { "python" } },
+  { command = "isort", filetypes = { "python" } },
+  -- {
+  --   -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+  --   command = "prettier",
+  --   ---@usage arguments to pass to the formatter
+  --   -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+  --   extra_args = { "--print-with", "100" },
+  --   ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+  --   filetypes = { "typescript", "typescriptreact" },
+  -- },
+}
 
 -- -- set additional linters
 -- local linters = require "lvim.lsp.null-ls.linters"
@@ -187,16 +189,6 @@ lvim.plugins = {
     requires = "hrsh7th/nvim-cmp",
     event = "InsertEnter",
   },
-  -- {
-  --   'wfxr/minimap.vim',
-  --   run = "cargo install --locked code-minimap",
-  --   -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
-  --   config = function ()
-  --     vim.cmd ("let g:minimap_width = 10")
-  --     vim.cmd ("let g:minimap_auto_start = 1")
-  --     vim.cmd ("let g:minimap_auto_start_win_enter = 1")
-  --   end,
-  -- },
   {
     "ruifm/gitlinker.nvim",
     event = "BufRead",
@@ -245,16 +237,6 @@ lvim.plugins = {
       require("nvim-ts-autotag").setup()
     end,
   },
-  -- {
-  --   'wfxr/minimap.vim',
-  --   run = "cargo install --locked code-minimap",
-  --   -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
-  --   config = function ()
-  --     vim.cmd ("let g:minimap_width = 10")
-  --     vim.cmd ("let g:minimap_auto_start = 1")
-  --     vim.cmd ("let g:minimap_auto_start_win_enter = 1")
-  --   end,
-  -- },
   {
     "sindrets/diffview.nvim",
     event = "BufRead",
@@ -264,35 +246,62 @@ lvim.plugins = {
   {"Mofiqul/dracula.nvim"},
   { "editorconfig/editorconfig-vim" },
   {
-    "simrat39/rust-tools.nvim",
+   "simrat39/rust-tools.nvim",
+    -- ft = { "rust", "rs" }, -- IMPORTANT: re-enabling this seems to break inlay-hints
     config = function()
-      local lsp_installer_servers = require "nvim-lsp-installer.servers"
-      local _, requested_server = lsp_installer_servers.get_server "rust_analyzer"
-      require("rust-tools").setup({
+      require("rust-tools").setup {
         tools = {
-          autoSetHints = true,
-          hover_with_actions = true,
-          runnables = {
-            use_telescope = true,
+          executor = require("rust-tools/executors").termopen, -- can be quickfix or termopen
+          reload_workspace_from_cargo_toml = true,
+          inlay_hints = {
+            auto = true,
+            only_current_line = false,
+            show_parameter_hints = true,
+            parameter_hints_prefix = "<-",
+            other_hints_prefix = "=>",
+            max_len_align = false,
+            max_len_align_padding = 1,
+            right_align = false,
+            right_align_padding = 7,
+            highlight = "Comment",
+          },
+          hover_actions = {
+            border = {
+              { "╭", "FloatBorder" },
+              { "─", "FloatBorder" },
+              { "╮", "FloatBorder" },
+              { "│", "FloatBorder" },
+              { "╯", "FloatBorder" },
+              { "─", "FloatBorder" },
+              { "╰", "FloatBorder" },
+              { "│", "FloatBorder" },
+            },
+            auto_focus = true,
           },
         },
         server = {
-          cmd_env = requested_server._default_options.cmd_env,
-          on_attach = require("lvim.lsp").common_on_attach,
           on_init = require("lvim.lsp").common_on_init,
+          on_attach = function(client, bufnr)
+            require("lvim.lsp").common_on_attach(client, bufnr)
+            local rt = require "rust-tools"
+            -- Hover actions
+            vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+            -- Code action groups
+            vim.keymap.set("n", "<leader>lA", rt.code_action_group.code_action_group, { buffer = bufnr })
+          end,
         },
-      })
+      }
     end,
-    ft = { "rust", "rs" },
   },
 }
 
+-- Copilot config
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
 vim.g.copilot_tab_fallback = ""
 local cmp = require "cmp"
 
-lvim.builtin.cmp.mapping["<C-e>"] = function(fallback)
+lvim.builtin.cmp.mapping["<S-I>"] = function(fallback)
   cmp.mapping.abort()
   local copilot_keys = vim.fn["copilot#Accept"]()
   if copilot_keys ~= "" then
