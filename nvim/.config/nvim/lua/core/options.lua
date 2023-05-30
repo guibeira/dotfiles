@@ -18,3 +18,6 @@ vim.cmd [[ set noswapfile ]]
 
 --Line numbers
 vim.wo.number = true
+
+-- clipboard stuff
+vim.opt.clipboard = 'unnamedplus'

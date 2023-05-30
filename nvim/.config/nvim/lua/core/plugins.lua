@@ -21,6 +21,7 @@ local plugins = {
   },
   -- my plugins
   --
+  'NvChad/nvim-colorizer.lua',
   'j-hui/fidget.nvim',
   'rmagatti/auto-session',
   'yamatsum/nvim-cursorline',
