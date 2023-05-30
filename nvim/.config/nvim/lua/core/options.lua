@@ -1,74 +1,20 @@
-local opt = vim.opt
-local g = vim.g
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
-local options = require("core.utils").load_config().options
+vim.opt.backspace = '2'
+vim.opt.showcmd = true
+vim.opt.laststatus = 2
+vim.opt.autowrite = true
+vim.opt.cursorline = true
+vim.opt.autoread = true
 
-opt.title = true
-opt.clipboard = options.clipboard
-opt.cmdheight = options.cmdheight
-opt.cul = true -- cursor line
+-- use spaces for tabs and whatnot
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.shiftround = true
+vim.opt.expandtab = true
 
--- Indentline
-opt.expandtab = options.expandtab
-opt.shiftwidth = options.shiftwidth
-opt.smartindent = options.smartindent
+vim.cmd [[ set noswapfile ]]
 
--- disable tilde on end of buffer: https://github.com/neovim/neovim/pull/8546#issuecomment-643643758
-opt.fillchars = options.fillchars
-
-opt.hidden = options.hidden
-opt.ignorecase = options.ignorecase
-opt.smartcase = options.smartcase
-opt.mouse = options.mouse
-
--- Numbers
-opt.number = options.number
-opt.numberwidth = options.numberwidth
-opt.relativenumber = options.relativenumber
-opt.ruler = options.ruler
-
--- disable nvim intro
-opt.shortmess:append "sI"
-
-opt.signcolumn = "yes"
-opt.splitbelow = true
-opt.splitright = true
-opt.tabstop = options.tabstop
-opt.termguicolors = true
-opt.timeoutlen = options.timeoutlen
-opt.undofile = options.undofile
-
--- interval for writing swap file to disk, also used by gitsigns
-opt.updatetime = options.updatetime
-
--- go to previous/next line with h,l,left arrow and right arrow
--- when cursor reaches end/beginning of line
-opt.whichwrap:append "<>[]hl"
-
-g.mapleader = options.mapleader
-
--- disable some builtin vim plugins
-local disabled_built_ins = {
-   "2html_plugin",
-   "getscript",
-   "getscriptPlugin",
-   "gzip",
-   "logipat",
-   "netrw",
-   "netrwPlugin",
-   "netrwSettings",
-   "netrwFileHandlers",
-   "matchit",
-   "tar",
-   "tarPlugin",
-   "rrhelper",
-   "spellfile_plugin",
-   "vimball",
-   "vimballPlugin",
-   "zip",
-   "zipPlugin",
-}
-
-for _, plugin in pairs(disabled_built_ins) do
-   g["loaded_" .. plugin] = 1
-end
+--Line numbers
+vim.wo.number = true
