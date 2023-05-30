@@ -21,6 +21,7 @@ local plugins = {
   },
   -- my plugins
   --
+  'j-hui/fidget.nvim',
   'rmagatti/auto-session',
   'yamatsum/nvim-cursorline',
   'nvim-lua/lsp-status.nvim',
