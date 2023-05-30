@@ -20,6 +20,8 @@ local plugins = {
     lazy = false,
   },
   -- my plugins
+  --
+  'rmagatti/auto-session',
   'yamatsum/nvim-cursorline',
   'nvim-lua/lsp-status.nvim',
   'gen740/SmoothCursor.nvim',
@@ -30,6 +32,8 @@ local plugins = {
   'anuvyklack/pretty-fold.nvim',
   {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
   {'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async'},
+  -- open git
+  "ruifm/gitlinker.nvim",
 
   'nvim-tree/nvim-tree.lua',
   'nvim-tree/nvim-web-devicons',
