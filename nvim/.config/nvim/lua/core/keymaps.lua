@@ -12,7 +12,8 @@ vim.keymap.set('n', "<S-T>", ":tabnew<cr>")
 vim.keymap.set('n', "<S-H>", ":bp<cr>")
 vim.keymap.set('n', "<S-L>", ":bn<cr>")
 -- close buffer
-vim.keymap.set('n', "<Leader>c", ":bdelete! <cr>")
+-- vim.keymap.set('n', "<Leader>c", ":BDelete this<cr>")
+vim.keymap.set('n', "<c-c>", ":BDelete this<cr>")
 
 vim.keymap.set('n', "<Leader>o", ":Telescope live_grep<cr>")
 vim.keymap.set('n', "<Leader>ff", ":Telescope find_files<cr>")

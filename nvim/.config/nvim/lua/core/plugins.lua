@@ -21,6 +21,7 @@ local plugins = {
   },
   -- my plugins
   --
+  'kazhala/close-buffers.nvim',
   'NvChad/nvim-colorizer.lua',
   'j-hui/fidget.nvim',
   'rmagatti/auto-session',
