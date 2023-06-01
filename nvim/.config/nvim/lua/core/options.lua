@@ -21,3 +21,7 @@ vim.wo.number = true
 
 -- clipboard stuff
 vim.opt.clipboard = 'unnamedplus'
+
+-- hide cmdline
+vim.opt.cmdheight = 0
+
