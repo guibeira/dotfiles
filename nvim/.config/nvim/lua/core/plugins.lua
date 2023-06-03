@@ -1,4 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -9,6 +10,7 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
@@ -21,6 +23,7 @@ local plugins = {
   },
   -- my plugins
   --
+  'jose-elias-alvarez/null-ls.nvim',
   'kazhala/close-buffers.nvim',
   'NvChad/nvim-colorizer.lua',
   'j-hui/fidget.nvim',
@@ -33,8 +36,8 @@ local plugins = {
   'karb94/neoscroll.nvim',
   'declancm/cinnamon.nvim',
   'anuvyklack/pretty-fold.nvim',
-  {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
-  {'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async'},
+  { 'akinsho/bufferline.nvim', version = "*",                              dependencies = 'nvim-tree/nvim-web-devicons' },
+  { 'kevinhwang91/nvim-ufo',   dependencies = 'kevinhwang91/promise-async' },
   -- open git
   "ruifm/gitlinker.nvim",
 
@@ -66,9 +69,9 @@ local plugins = {
   "williamboman/mason-lspconfig.nvim",
   "glepnir/lspsaga.nvim",
   {
-	  'nvim-telescope/telescope.nvim',
-	  tag = '0.1.0',
-	  dependencies = { {'nvim-lua/plenary.nvim'} }
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.0',
+    dependencies = { { 'nvim-lua/plenary.nvim' } }
   }
 }
 

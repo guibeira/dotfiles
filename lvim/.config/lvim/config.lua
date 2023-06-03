@@ -220,6 +220,13 @@ lvim.builtin.which_key.mappings["P"] = {
 
 -- Additional Plugins
 lvim.plugins = {
+  -- { 'Exafunction/codeium.vim' },
+  {
+    "max397574/better-escape.nvim",
+    config = function()
+      require("better_escape").setup()
+    end,
+  },
   {
     'rmagatti/auto-session',
     config = function()
