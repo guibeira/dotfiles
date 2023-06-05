@@ -21,6 +21,7 @@ null_ls.setup({
 		--lua
 		null_ls.builtins.formatting.stylua,
 		-- javascript
+		null_ls.builtins.formatting.prettier,
 		null_ls.builtins.diagnostics.eslint,
 		-- terraform
 		null_ls.builtins.diagnostics.terraform_validate,
