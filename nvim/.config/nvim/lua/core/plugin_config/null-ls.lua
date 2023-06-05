@@ -7,15 +7,23 @@ null_ls.setup({
 		null_ls.builtins.diagnostics.cspell,
 		null_ls.builtins.code_actions.cspell,
 		null_ls.builtins.completion.spell,
+		-- docker
+		null_ls.builtins.diagnostics.dotenv_linter,
+		null_ls.builtins.diagnostics.hadolint,
 		-- python
 		null_ls.builtins.formatting.isort,
 		null_ls.builtins.formatting.black,
 		null_ls.builtins.diagnostics.mypy,
 		null_ls.builtins.diagnostics.ruff,
+		null_ls.builtins.diagnostics.vulture,
+		--css
+		null_ls.builtins.formatting.stylelint,
 		--lua
 		null_ls.builtins.formatting.stylua,
 		-- javascript
 		null_ls.builtins.diagnostics.eslint,
+		-- terraform
+		null_ls.builtins.diagnostics.terraform_validate,
 	},
 
 	on_attach = function(client, bufnr)
