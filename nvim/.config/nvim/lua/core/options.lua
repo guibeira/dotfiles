@@ -26,3 +26,6 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.cmdheight = 0
 
 vim.wo.relativenumber = true
+
+-- ignore case
+vim.opt.ignorecase = true

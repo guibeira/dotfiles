@@ -39,7 +39,14 @@ local plugins = {
   "jose-elias-alvarez/null-ls.nvim",
   "kazhala/close-buffers.nvim",
   "NvChad/nvim-colorizer.lua",
-  "j-hui/fidget.nvim",
+  {
+    "j-hui/fidget.nvim",
+    tag = "legacy",
+    event = "LspAttach",
+    opts = {
+      -- options
+    },
+  },
   "rmagatti/auto-session",
   "yamatsum/nvim-cursorline",
   "nvim-lua/lsp-status.nvim",
@@ -70,7 +77,7 @@ local plugins = {
   { "kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async" },
   -- open git
   "ruifm/gitlinker.nvim",
-  { "m4xshen/hardtime.nvim", opts = { disable_mouse = false } },
+  -- { "m4xshen/hardtime.nvim", opts = { disable_mouse = false } },
 
   "nvim-tree/nvim-tree.lua",
   "nvim-tree/nvim-web-devicons",
@@ -98,7 +105,7 @@ local plugins = {
   "williamboman/mason.nvim",
   "neovim/nvim-lspconfig",
   "williamboman/mason-lspconfig.nvim",
-  "glepnir/lspsaga.nvim",
+  "nvimdev/lspsaga.nvim",
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.0",
