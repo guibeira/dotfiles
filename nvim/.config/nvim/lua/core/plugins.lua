@@ -90,9 +90,12 @@ local plugins = {
   "tpope/vim-fugitive",
   "tpope/vim-commentary",
 
-  -- rust babyyyyyyy
+  -- debug
   "mfussenegger/nvim-dap",
   "rcarriga/nvim-dap-ui",
+  "mfussenegger/nvim-dap-python",
+
+  -- rust babyyyyyyy
   "simrat39/rust-tools.nvim",
 
   -- completion
