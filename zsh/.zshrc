@@ -122,11 +122,20 @@ alias nv='nvim'
 
 alias 'git commit -m'=/home/doggao/code/saude/saude-api/gcommit
 # environment variables
+#if [ -f '~/.zsh_env_vars' ]; then 
 source ~/.zsh_env_vars
-
+#fi
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/doggao/google-cloud-sdk/path.zsh.inc' ]; then . '/home/doggao/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/doggao/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/doggao/google-cloud-sdk/completion.zsh.inc'; fi
+
+# enable docker in wsl
+if grep -q "microsoft" /proc/version > /dev/null 2>&1; then
+    if service docker status 2>&1 | grep -q "is not running"; then
+        wsl.exe --distribution "${WSL_DISTRO_NAME}" --user root \
+            --exec /usr/sbin/service docker start > /dev/null 2>&1
+    fi
+fi
