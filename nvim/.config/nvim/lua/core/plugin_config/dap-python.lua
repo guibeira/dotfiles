@@ -3,7 +3,7 @@ table.insert(require("dap").configurations.python, {
 	type = "python",
 	request = "attach",
 	connect = {
-		port = 7002,
+		port = 5678,
 		host = "127.0.0.1",
 	},
 	mode = "remote",
