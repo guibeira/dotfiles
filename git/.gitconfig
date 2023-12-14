@@ -18,9 +18,12 @@
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
     side-by-side = true
     line-number = true
+    theme="Dracula"
 
 [merge]
     conflictstyle = diff3
 
 [diff]
     colorMoved = default
+[init]
+	defaultBranch = main

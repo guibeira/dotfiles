@@ -139,3 +139,12 @@ if grep -q "microsoft" /proc/version > /dev/null 2>&1; then
             --exec /usr/sbin/service docker start > /dev/null 2>&1
     fi
 fi
+
+# bun completions
+[ -s "/home/doggao/.bun/_bun" ] && source "/home/doggao/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# alias yarn='bun run'

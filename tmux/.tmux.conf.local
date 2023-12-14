@@ -391,6 +391,7 @@ set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @continuum-restore 'on'
 set -g @resurrect-processes 'ssh psql sqlite3 nvim'
 set -g @resurrect-strategy-nvim 'session'
+set -g @plugin 'nhdaly/tmux-better-mouse-mode'
 # -- custom variables ----------------------------------------------------------
 
 # to define a custom #{foo} variable, define a POSIX shell function between the
