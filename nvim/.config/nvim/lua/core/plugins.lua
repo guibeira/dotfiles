@@ -17,6 +17,7 @@ local plugins = {
 	"wbthomason/packer.nvim",
 	"ellisonleao/gruvbox.nvim",
 	"rebelot/kanagawa.nvim",
+	"goolord/alpha-nvim",
 	{
 		"dracula/vim",
 		lazy = false,
@@ -177,7 +178,7 @@ local plugins = {
 		lazy = "leetcode.nvim" ~= vim.fn.argv()[1],
 		opts = {
 			arg = "leetcode.nvim",
-			lang = "python",
+			lang = "python3",
 			directory = vim.fn.expand("~/leetcode"),
 		},
 		dependencies = {
