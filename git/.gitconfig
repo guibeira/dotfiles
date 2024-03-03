@@ -1,9 +1,12 @@
-[user]
-	email = guilherme.vieira.beira@gmail.com
-	name = guilhermevbeira
-
 # Use delta as default pager
 # cargo install git-delta
+#
+[includeIf "gitdir:~/personal/"] # include for all .git projects under personnal/ 
+path = ~/personal/.gitconfig-pers
+ 
+[includeIf "gitdir:~/work/"]
+path = ~/work/.gitconfig-work
+
 [core]
     #hooksPath = /home/doggao/gitglobalhooks
     pager = delta
@@ -25,5 +28,11 @@
 
 [diff]
     colorMoved = default
+
 [init]
 	defaultBranch = main
+ 
+ 
+[core]
+excludesfile = ~/.gitignore      # valid everywhere
+
