@@ -35,7 +35,6 @@ local plugins = {
 			-- refer to the configuration section below
 		},
 	},
-	--"jose-elias-alvarez/null-ls.nvim",
 	"nvimtools/none-ls.nvim",
 	"kazhala/close-buffers.nvim",
 	"NvChad/nvim-colorizer.lua",
@@ -92,7 +91,6 @@ local plugins = {
 			require("symbols-outline").setup()
 		end,
 	},
-
 	{
 		"jackMort/ChatGPT.nvim",
 		event = "VeryLazy",
@@ -178,7 +176,7 @@ local plugins = {
 		lazy = "leetcode.nvim" ~= vim.fn.argv()[1],
 		opts = {
 			arg = "leetcode.nvim",
-			lang = "python3",
+			lang = "rust",
 			directory = vim.fn.expand("~/leetcode"),
 		},
 		dependencies = {

@@ -9,13 +9,16 @@ null_ls.setup({
 		-- null_ls.builtins.completion.spell,
 		-- docker
 		null_ls.builtins.diagnostics.dotenv_linter,
-		null_ls.builtins.diagnostics.hadolint,
+		-- null_ls.builtins.diagnostics.hadolint,
 		-- python
 		null_ls.builtins.formatting.isort,
-		null_ls.builtins.formatting.black,
+		null_ls.builtins.diagnostics.flake8,
+		null_ls.builtins.formatting.black.with({
+			extra_args = { "--line-length", "120" },
+		}),
 		null_ls.builtins.diagnostics.mypy,
 		null_ls.builtins.diagnostics.ruff,
-		null_ls.builtins.formatting.ruff,
+		-- null_ls.builtins.formatting.ruff,
 		-- null_ls.builtins.diagnostics.vulture,
 		-- Rust
 		null_ls.builtins.formatting.rustfmt,

@@ -111,6 +111,9 @@ source $ZSH/oh-my-zsh.sh
 # atuin config
 eval "$(atuin init zsh)"
 
+# zoxide
+eval "$(zoxide init --cmd cd zsh)"
+
 # replace ls for exa
 alias ls=exa -G -x -F --icons -S  --git
 # replace cat for bat

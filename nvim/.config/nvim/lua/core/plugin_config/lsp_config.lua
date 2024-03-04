@@ -1,4 +1,24 @@
-require("mason-lspconfig").setup()
+local servers = {
+	"cssls",
+	"cmake",
+	"dockerls",
+	"eslint",
+	"jsonls",
+	"lua_ls",
+	"marksman",
+	"pyright",
+	"flake8",
+	--"ruff_lsp",
+	"rust_analyzer",
+	"sqlls",
+	"tailwindcss",
+	"tsserver",
+	"volar",
+}
+
+require("mason-lspconfig").setup({
+	ensure_installed = servers,
+})
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
@@ -19,25 +39,11 @@ require("lspconfig").lua_ls.setup({
 	},
 })
 
-require("lspconfig").solargraph.setup({
-	capabilities = capabilities,
-})
+for _, server in ipairs(servers) do
+	require("lspconfig")[server].setup({
+		capabilities = capabilities,
+	})
+end
 
--- rust
-require("lspconfig").rust_analyzer.setup({
-	capabilities = capabilities,
-})
+local original_notify = vim.notify
 
--- python
-require("lspconfig").pyright.setup({
-	capabilities = capabilities,
-})
-
-require("lspconfig").ruff_lsp.setup({
-	capabilities = capabilities,
-})
-
--- javascript
-require("lspconfig").tsserver.setup({
-	capabilities = capabilities,
-})
