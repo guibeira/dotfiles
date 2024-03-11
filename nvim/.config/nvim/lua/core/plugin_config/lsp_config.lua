@@ -7,7 +7,6 @@ local servers = {
 	"lua_ls",
 	"marksman",
 	"pyright",
-	"flake8",
 	--"ruff_lsp",
 	"rust_analyzer",
 	"sqlls",
@@ -44,6 +43,3 @@ for _, server in ipairs(servers) do
 		capabilities = capabilities,
 	})
 end
-
-local original_notify = vim.notify
-

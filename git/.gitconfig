@@ -1,7 +1,7 @@
 # Use delta as default pager
 # cargo install git-delta
 #
-[includeIf "gitdir:~/"] # include for all .git projects under personnal/ 
+[includeIf "gitdir:~/personal"] # include for all .git projects under personnal/ 
 path = ~/personal/.gitconfig-pers
  
 [includeIf "gitdir:~/work/"]
