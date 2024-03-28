@@ -127,7 +127,7 @@ local plugins = {
 
 	-- debug
 	"mfussenegger/nvim-dap",
-	"rcarriga/nvim-dap-ui",
+  {"rcarriga/nvim-dap-ui", dependencies = "nvim-neotest/nvim-nio"},
 	"mfussenegger/nvim-dap-python",
 
 	-- rust babyyyyyyy
