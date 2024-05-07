@@ -123,17 +123,8 @@ export EDITOR='nvim'
 alias ipy='ipython'
 alias nv='nvim'
 
-alias 'git commit -m'=/home/doggao/code/saude/saude-api/gcommit
-# environment variables
-#if [ -f '~/.zsh_env_vars' ]; then 
-source ~/.zsh_env_vars
-#fi
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/doggao/google-cloud-sdk/path.zsh.inc' ]; then . '/home/doggao/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/doggao/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/doggao/google-cloud-sdk/completion.zsh.inc'; fi
+# load file .zsh_env_vars if it exists to set environment
+[ -f ~/.zsh_env_vars ] &&  source ~/.zsh_env_vars || true
 
 # enable docker in wsl
 if grep -q "microsoft" /proc/version > /dev/null 2>&1; then
@@ -143,11 +134,18 @@ if grep -q "microsoft" /proc/version > /dev/null 2>&1; then
     fi
 fi
 
+# bun stuff
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 # bun completions
 [ -s "/home/doggao/.bun/_bun" ] && source "/home/doggao/.bun/_bun"
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --zsh)"
 
-# alias yarn='bun run'
+# GCP stuff
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/doggao/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/doggao/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/doggao/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/doggao/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
