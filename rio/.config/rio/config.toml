@@ -1,0 +1,28 @@
+cursor = '|'
+theme = "tokyonight"
+editor = '/opt/homebrew/bin/nvim'
+blinking-cursor = false
+
+[fonts]
+family = "Mononoki Nerd Font"
+size = 18
+
+
+[keyboard]
+use-kitty-keyboard-protocol = false
+disable-ctlseqs-alt = false
+
+
+[navigation]
+mode = "NativeTab"
+clickable = true
+use-current-path = false
+color-automation = []
+
+[colors]
+cursor = '#0BA95B' 
+
+[renderer]
+performance = "High"
+backend = "Metal"
+disable-unfocused-render = false
