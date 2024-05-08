@@ -4,8 +4,9 @@ editor = '/opt/homebrew/bin/nvim'
 blinking-cursor = false
 
 [fonts]
-family = "Mononoki Nerd Font"
-size = 18
+family = "ComicShannsMono Nerd Font"
+size = 20
+
 
 
 [keyboard]
