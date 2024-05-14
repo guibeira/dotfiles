@@ -134,6 +134,13 @@ if grep -q "microsoft" /proc/version > /dev/null 2>&1; then
     fi
 fi
 
+# enable docker in macos
+if ! docker info >/dev/null 2>&1; then
+    echo "⛴️ Initializing Docker..."
+    open --background -a Docker
+fi
+
+
 # bun stuff
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
