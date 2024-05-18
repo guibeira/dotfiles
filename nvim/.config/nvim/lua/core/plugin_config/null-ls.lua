@@ -16,7 +16,7 @@ null_ls.setup({
       extra_args = { "--line-length", "120" },
     }),
     null_ls.builtins.diagnostics.mypy,
-    null_ls.builtins.formatting.ruff,
+    -- null_ls.builtins.formatting.ruff,
     -- null_ls.builtins.diagnostics.vulture,
     -- Rust
 

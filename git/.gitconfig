@@ -36,6 +36,3 @@ path = ~/work/.gitconfig-work
 [core]
 excludesfile = ~/.gitignore      # valid everywhere
 
-[user]
-	email = guilherme.vieira.beira@gmail.com
-	name = guibeira
