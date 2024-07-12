@@ -25,6 +25,7 @@ local plugins = {
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
+		commit = "d65087b892c45d3722b6511c83a029671d6290e5",
 		init = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
@@ -127,7 +128,7 @@ local plugins = {
 
 	-- debug
 	"mfussenegger/nvim-dap",
-  {"rcarriga/nvim-dap-ui", dependencies = "nvim-neotest/nvim-nio"},
+	--{"rcarriga/nvim-dap-ui", dependencies = "nvim-neotest/nvim-nio"},
 	"mfussenegger/nvim-dap-python",
 
 	-- rust babyyyyyyy

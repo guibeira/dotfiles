@@ -7,7 +7,7 @@ local servers = {
 	"lua_ls",
 	"marksman",
 	"pyright",
-	--"ruff_lsp",
+	--	"ruff_lsp",
 	"rust_analyzer",
 	"sqlls",
 	"tailwindcss",
@@ -20,6 +20,13 @@ require("mason-lspconfig").setup({
 })
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- require("lspconfig").ruff_lsp.setup({
+-- 	init_options = {
+-- 		settings = {
+-- 			args = {},
+-- 		},
+-- 	},
+-- })
 
 require("lspconfig").lua_ls.setup({
 	capabilities = capabilities,

@@ -120,6 +120,7 @@ alias ls=exa -G -x -F --icons -S  --git
 alias cat=bat
 
 export EDITOR='nvim'
+
 alias ipy='ipython'
 alias nv='nvim'
 
@@ -156,3 +157,16 @@ if [ -f '/Users/doggao/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/User
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/doggao/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/doggao/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export NDK_HOME="/opt/homebrew/share/android-ndk"
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools\latest\bin
+
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
+
