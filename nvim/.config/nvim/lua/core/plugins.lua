@@ -55,6 +55,13 @@ local plugins = {
     },
 	},
 	{
+		"echasnovski/mini.nvim",
+		version = "*",
+		config = function()
+			require("mini.pairs").setup()
+		end,
+	},
+	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
 		opts = {
@@ -87,9 +94,14 @@ local plugins = {
 	"declancm/cinnamon.nvim",
 	"anuvyklack/pretty-fold.nvim",
 	{
-		"simrat39/symbols-outline.nvim",
+		"hedyhli/outline.nvim",
 		config = function()
-			require("symbols-outline").setup()
+			-- Example mapping to toggle outline
+			vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
+
+			require("outline").setup({
+				-- Your setup opts here (leave empty to use defaults)
+			})
 		end,
 	},
 	{
