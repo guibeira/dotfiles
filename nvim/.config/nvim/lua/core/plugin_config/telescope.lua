@@ -1,4 +1,10 @@
-require('telescope').setup()
+require "telescope".setup {
+  pickers = {
+    colorscheme = {
+      enable_preview = true
+    }
+  }
+}
 local builtin = require('telescope.builtin')
 
 vim.keymap.set('n', '<c-p>', builtin.find_files, {})

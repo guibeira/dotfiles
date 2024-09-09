@@ -37,6 +37,10 @@ local plugins = {
 		},
 	},
 	"nvimtools/none-ls.nvim",
+	{
+		"stevearc/conform.nvim",
+		opts = {},
+	},
 	"kazhala/close-buffers.nvim",
 	"NvChad/nvim-colorizer.lua",
 	{
@@ -144,7 +148,11 @@ local plugins = {
 	"mfussenegger/nvim-dap-python",
 
 	-- rust babyyyyyyy
-	"simrat39/rust-tools.nvim",
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^5", -- Recommended
+		lazy = false, -- This plugin is already lazy
+	},
 
 	-- markdown preview
 	{

@@ -7,12 +7,15 @@ local servers = {
 	"lua_ls",
 	"marksman",
 	"pyright",
-	--	"ruff_lsp",
-	"rust_analyzer",
+	-- "ruff_lsp",
+	-- "rust_analyzer",
 	"sqlls",
 	"tailwindcss",
-	"tsserver",
+	"ts_ls",
 	"volar",
+	"html",
+	"htmx",
+	"jinja_lsp",
 }
 
 require("mason-lspconfig").setup({
