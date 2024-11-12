@@ -77,7 +77,7 @@ local plugins = {
 			-- OPTIONAL:
 			--   `nvim-notify` is only needed, if you want to use the notification view.
 			--   If not available, we use `mini` as the fallback
-			"rcarriga/nvim-notify",
+			-- "rcarriga/nvim-notify",
 		},
 	},
 	{
@@ -96,7 +96,7 @@ local plugins = {
 	"smjonas/live-command.nvim",
 	"karb94/neoscroll.nvim",
 	"declancm/cinnamon.nvim",
-	"anuvyklack/pretty-fold.nvim",
+	"bbjornstad/pretty-fold.nvim",
 	{
 		"hedyhli/outline.nvim",
 		config = function()
@@ -117,6 +117,7 @@ local plugins = {
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"nvim-lua/plenary.nvim",
+			"folke/trouble.nvim",
 			"nvim-telescope/telescope.nvim",
 		},
 	},
@@ -130,7 +131,6 @@ local plugins = {
 	-- open git
 	"ruifm/gitlinker.nvim",
 	-- { "m4xshen/hardtime.nvim", opts = { disable_mouse = false } },
-
 	"nvim-tree/nvim-tree.lua",
 	"nvim-tree/nvim-web-devicons",
 	"nvim-lualine/lualine.nvim",
@@ -142,9 +142,21 @@ local plugins = {
 	"tpope/vim-fugitive",
 	"tpope/vim-commentary",
 
+	{
+		"pwntester/octo.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+			-- OR 'ibhagwan/fzf-lua',
+			"nvim-tree/nvim-web-devicons",
+		},
+		config = function()
+			require("octo").setup()
+		end,
+	},
 	-- debug
 	"mfussenegger/nvim-dap",
-	--{"rcarriga/nvim-dap-ui", dependencies = "nvim-neotest/nvim-nio"},
+	{ "rcarriga/nvim-dap-ui", dependencies = "nvim-neotest/nvim-nio" },
 	"mfussenegger/nvim-dap-python",
 
 	-- rust babyyyyyyy
@@ -173,6 +185,7 @@ local plugins = {
 		config = function()
 			vim.cmd([[do FileType]])
 		end,
+		ft = { "markdown" },
 	},
 
 	-- completion
@@ -183,6 +196,7 @@ local plugins = {
 	"rafamadriz/friendly-snippets",
 	"github/copilot.vim",
 	"williamboman/mason.nvim",
+
 	"neovim/nvim-lspconfig",
 	"williamboman/mason-lspconfig.nvim",
 	"nvimdev/lspsaga.nvim",
@@ -207,7 +221,7 @@ local plugins = {
 
 			-- optional
 			"nvim-treesitter/nvim-treesitter",
-			"rcarriga/nvim-notify",
+			-- "rcarriga/nvim-notify",
 			"nvim-tree/nvim-web-devicons",
 		},
 	},

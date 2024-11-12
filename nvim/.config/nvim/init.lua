@@ -3,6 +3,5 @@ require("core.keymaps")
 require("core.plugins")
 require("core.plugin_config")
 
--- close the nvim-tree 
+-- close the nvim-tree
 vim.cmd([[autocmd VimEnter * NvimTreeClose]])
-

@@ -1,16 +1,17 @@
-cursor = '|'
-theme = "tokyonight"
-editor = '/opt/homebrew/bin/nvim'
+[cursor]
+shape = 'beam'
+
+theme = "tokionight"
 blinking-cursor = false
+option-as-alt = 'left'
 
 [fonts]
 family = "ComicShannsMono Nerd Font"
-size = 20
-
+size = 22
 
 
 [keyboard]
-use-kitty-keyboard-protocol = false
+use-kitty-keyboard-protocol = true
 disable-ctlseqs-alt = false
 
 
@@ -27,3 +28,13 @@ cursor = '#0BA95B'
 performance = "High"
 backend = "Metal"
 disable-unfocused-render = false
+
+
+[window]
+width = 600
+height = 400
+mode = "Windowed"
+#opacity = 0.5
+opacity = 1.0
+blur = true
+decorations = "Disabled"

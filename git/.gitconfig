@@ -3,6 +3,9 @@
 #
 [includeIf "gitdir:~/"] # include for all .git projects under personnal/ 
 path = ~/personal/.gitconfig-pers
+
+[includeIf "gitdir:~/dotfiles"] # include for all .git projects under personnal/ 
+path = ~/personal/.gitconfig-pers
  
 [includeIf "gitdir:~/work/"]
 path = ~/work/.gitconfig-work

@@ -173,3 +173,11 @@ export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
 gch() {
   git checkout "$(git branch | fzf | tr -d '[:space:]')"
 }
+
+# pnpm
+export PNPM_HOME="/Users/doggao/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
