@@ -168,25 +168,35 @@ local plugins = {
 
 	-- markdown preview
 	{
-		"iamcco/markdown-preview.nvim",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		build = function()
-			vim.fn["mkdp#util#install"]()
-		end,
-		keys = {
-			{
-
-				"<leader>cp",
-				ft = "markdown",
-				"<cmd>MarkdownPreviewToggle<cr>",
-				desc = "Markdown Preview",
-			},
-		},
+		"toppair/peek.nvim",
+		event = { "VeryLazy" },
+		build = "deno task --quiet build:fast",
 		config = function()
-			vim.cmd([[do FileType]])
+			require("peek").setup()
+			vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+			vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
 		end,
-		ft = { "markdown" },
 	},
+	-- {
+	-- 	"iamcco/markdown-preview.nvim",
+	-- 	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+	-- 	build = function()
+	-- 		vim.fn["mkdp#util#install"]()
+	-- 	end,
+	-- 	keys = {
+	-- 		{
+
+	-- 			"<leader>cp",
+	-- 			ft = "markdown",
+	-- 			"<cmd>MarkdownPreviewToggle<cr>",
+	-- 			desc = "Markdown Preview",
+	-- 		},
+	-- 	},
+	-- 	config = function()
+	-- 		vim.cmd([[do FileType]])
+	-- 	end,
+	-- 	ft = { "markdown" },
+	-- },
 
 	-- completion
 	"hrsh7th/nvim-cmp",
@@ -204,6 +214,16 @@ local plugins = {
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.5",
 		dependencies = { { "nvim-lua/plenary.nvim" } },
+	},
+	{
+		"olimorris/codecompanion.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			-- The following are optional:
+			{ "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } },
+		},
+		config = true,
 	},
 	{
 		"kawre/leetcode.nvim",

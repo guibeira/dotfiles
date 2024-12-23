@@ -13,15 +13,19 @@ rt.setup({
 	server = {
 		capabilities = require("cmp_nvim_lsp").default_capabilities(),
 		on_attach = function(_, bufnr)
+			-- toogle inlay type hints
+			vim.keymap.set(
+				"n",
+				"<Leader>h",
+				":lua require'rust-tools.inlay_hints'.toggle_inlay_hints()<CR>",
+				{ buffer = bufnr }
+			)
 			vim.keymap.set("n", "<Leader>k", rt.hover_actions.hover_actions, { buffer = bufnr })
 			vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
 		end,
 	},
 	tools = { -- rust-tools options
 
-		hover_actions = {
-			auto_focus = true,
-		},
 		-- how to execute terminal commands
 		-- options right now: termopen / quickfix / toggleterm / vimux
 		executor = require("rust-tools.executors").termopen,
@@ -94,7 +98,7 @@ rt.setup({
 
 			-- whether the hover action window gets automatically focused
 			-- default: false
-			auto_focus = false,
+			auto_focus = true,
 		},
 
 		-- settings for showing the crate graph based on graphviz and the dot
