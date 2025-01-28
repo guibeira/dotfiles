@@ -389,11 +389,23 @@ set -g @plugin 'noscript/tmux-mighty-scroll'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @continuum-restore 'on'
-set -g @resurrect-processes 'ssh psql sqlite3 nvim'
+set -g @resurrect-processes 'nv'
+set -g @resurrect-strategy-nvim 'session'
 set -g @resurrect-strategy-nvim 'session'
 set -g @plugin 'nhdaly/tmux-better-mouse-mode'
 
+# ~/.tmux.conf
 
+set -g @plugin 'tmux-plugins/tpm' # mandatory
+set -g @plugin 'tmux-plugins/tmux-sensible' # optional recommended
+
+set -g @plugin 'egel/tmux-gruvbox'
+# set desired theme options...
+set -g @tmux-gruvbox 'dark256' # or 'dark256', 'light', 'light256'
+# or set date in EU notation
+set -g @tmux-gruvbox-right-status-x '%d.%m.%Y' # e.g.: 30.01.2024
+# display hostname and enhance section with other plugin
+set -g @tmux-gruvbox-right-status-z '#(dolar 2>/dev/null; sleep 900) #{tmux_mode_indicator}'
 
 # -- custom variables ----------------------------------------------------------
 

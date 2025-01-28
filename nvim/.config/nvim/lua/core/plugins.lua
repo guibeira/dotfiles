@@ -58,13 +58,13 @@ local plugins = {
       { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
 	},
-	{
-		"echasnovski/mini.nvim",
-		version = "*",
-		config = function()
-			require("mini.pairs").setup()
-		end,
-	},
+	-- {
+	-- 	"echasnovski/mini.nvim",
+	-- 	version = "*",
+	-- 	config = function()
+	-- 		require("mini.pairs").setup()
+	-- 	end,
+	-- },
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
@@ -165,6 +165,11 @@ local plugins = {
 		version = "^5", -- Recommended
 		lazy = false, -- This plugin is already lazy
 	},
+	{
+		"chrisgrieser/nvim-lsp-endhints",
+		event = "LspAttach",
+		opts = {}, -- required, even if empty
+	},
 
 	-- markdown preview
 	{
@@ -177,33 +182,23 @@ local plugins = {
 			vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
 		end,
 	},
-	-- {
-	-- 	"iamcco/markdown-preview.nvim",
-	-- 	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-	-- 	build = function()
-	-- 		vim.fn["mkdp#util#install"]()
-	-- 	end,
-	-- 	keys = {
-	-- 		{
-
-	-- 			"<leader>cp",
-	-- 			ft = "markdown",
-	-- 			"<cmd>MarkdownPreviewToggle<cr>",
-	-- 			desc = "Markdown Preview",
-	-- 		},
-	-- 	},
-	-- 	config = function()
-	-- 		vim.cmd([[do FileType]])
-	-- 	end,
-	-- 	ft = { "markdown" },
-	-- },
-
 	-- completion
-	"hrsh7th/nvim-cmp",
-	"hrsh7th/cmp-nvim-lsp",
-	"L3MON4D3/LuaSnip",
-	"saadparwaiz1/cmp_luasnip",
-	"rafamadriz/friendly-snippets",
+	{
+		"hrsh7th/nvim-cmp",
+		event = "InsertEnter",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-cmdline",
+			"hrsh7th/nvim-cmp",
+			"hrsh7th/cmp-buffer", -- source for text in buffer
+			"hrsh7th/cmp-path", -- source for file system paths
+			"L3MON4D3/LuaSnip", -- snippet engine
+			"saadparwaiz1/cmp_luasnip", -- for autocompletion
+			"rafamadriz/friendly-snippets", -- useful snippets
+			"onsails/lspkind.nvim", -- vs-code like pictograms
+		},
+	},
+
 	"github/copilot.vim",
 	"williamboman/mason.nvim",
 
@@ -243,6 +238,14 @@ local plugins = {
 			"nvim-treesitter/nvim-treesitter",
 			-- "rcarriga/nvim-notify",
 			"nvim-tree/nvim-web-devicons",
+		},
+		{
+			"folke/zen-mode.nvim",
+			opts = {
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			},
 		},
 	},
 }

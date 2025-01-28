@@ -122,7 +122,6 @@ alias cat=bat
 export EDITOR='nvim'
 
 alias ipy='ipython'
-alias nv='nvim'
 
 # load file .zsh_env_vars if it exists to set environment
 [ -f ~/.zsh_env_vars ] &&  source ~/.zsh_env_vars || true
