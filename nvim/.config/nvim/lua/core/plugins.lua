@@ -160,6 +160,7 @@ local plugins = {
 	"mfussenegger/nvim-dap-python",
 
 	-- rust babyyyyyyy
+	{ "cordx56/rustowl", dependencies = { "neovim/nvim-lspconfig" } },
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^5", -- Recommended

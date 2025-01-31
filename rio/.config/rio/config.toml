@@ -35,7 +35,7 @@ size = 22
 
 [keyboard]
 use-kitty-keyboard-protocol = true
-disable-ctlseqs-alt = false
+disable-ctlseqs-alt = true
 
 
 [navigation]
