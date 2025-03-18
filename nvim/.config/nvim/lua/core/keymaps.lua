@@ -24,6 +24,8 @@ vim.keymap.set("n", "<Leader>fg", ":Telescope git_files<cr>")
 
 vim.keymap.set("n", "<C-S-Right>", ":vertical resize +2<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-S-Left>", ":vertical resize -2<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-S-Up>", ":resize +2<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-S-Down>", ":resize -2<CR>", { noremap = true, silent = true })
 -- telescope preview colorscheme
 vim.keymap.set("n", "<Leader>pc", ":Telescope colorscheme <cr>")
 

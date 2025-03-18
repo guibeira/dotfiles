@@ -51,10 +51,11 @@ disable-unfocused-render = false
 
 
 [window]
-width = 600
-height = 400
+width = 2560
+height = 1440
 mode = "Windowed"
 #opacity = 0.5
-opacity = 1.0
+opacity = 0.5
 blur = true
-decorations = "Disabled"
+decorations = "Transparent"
+#decorations = "Disabled"
