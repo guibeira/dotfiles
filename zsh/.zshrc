@@ -115,7 +115,7 @@ eval "$(atuin init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
 # replace ls for exa
-alias ls=exa -G -x -F --icons -S  --git
+alias ls=exa -G -x -F --icons -S  --git --color=always
 # replace cat for bat
 alias cat=bat
 
@@ -150,7 +150,15 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
 
-# GCP stuff
+## fzf stuff
+
+# git checkout
+alias gc='git branch | fzf | xargs git checkout'
+# docker logs
+alias dl="docker ps --format '{{.Names}}' | fzf --preview='docker logs {1} | tail -n 30' | awk '{print \$1}' | xargs docker logs -f"
+# docker attach
+alias da='docker attach "$(docker ps | fzf | awk '\''{print $1}'\'')"'
+ 
 
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -162,10 +170,6 @@ export PATH=$PATH:$ANDROID_HOME/cmdline-tools\latest\bin
 
 export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
 export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
-
-gch() {
-  git checkout "$(git branch | fzf | tr -d '[:space:]')"
-}
 
 # pnpm
 export PNPM_HOME="/Users/doggao/Library/pnpm"

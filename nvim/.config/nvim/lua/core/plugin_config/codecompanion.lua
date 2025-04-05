@@ -2,7 +2,7 @@ require("codecompanion").setup({
 
 	opts = {
 		send_code = true, -- Only because I'm local ollama
-		language = "Portuguese",
+		language = "English",
 	},
 	adapters = {
 		llama3 = function()
