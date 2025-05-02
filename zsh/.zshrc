@@ -158,6 +158,7 @@ alias gc='git branch | fzf | xargs git checkout'
 alias dl="docker ps --format '{{.Names}}' | fzf --preview='docker logs {1} | tail -n 30' | awk '{print \$1}' | xargs docker logs -f"
 # docker attach
 alias da='docker attach "$(docker ps | fzf | awk '\''{print $1}'\'')"'
+alias dx='docker exec -it "$(docker ps | fzf | awk '\''{print $1}'\'')" bash'
  
 
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk

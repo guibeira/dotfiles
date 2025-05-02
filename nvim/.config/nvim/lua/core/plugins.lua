@@ -161,17 +161,24 @@ local plugins = {
 	"mfussenegger/nvim-dap-python",
 
 	-- rust babyyyyyyy
-	{ "cordx56/rustowl", dependencies = { "neovim/nvim-lspconfig" } },
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^5", -- Recommended
 		lazy = false, -- This plugin is already lazy
+		dependencies = "mattn/webapi-vim",
 	},
 	{
 		"chrisgrieser/nvim-lsp-endhints",
 		event = "LspAttach",
 		opts = {}, -- required, even if empty
 	},
+	-- {
+	-- 	"cordx56/rustowl",
+	-- 	version = "*", -- Latest stable version
+	-- 	build = "cd rustowl && cargo install --path . -F installer --locked",
+	-- 	lazy = false, -- This plugin is already lazy
+	-- 	opts = {},
+	-- },
 
 	-- markdown preview
 	{
@@ -222,76 +229,125 @@ local plugins = {
 		tag = "0.1.5",
 		dependencies = { { "nvim-lua/plenary.nvim" } },
 	},
-	-- {
-	-- 	"yetone/avante.nvim",
-	-- 	event = "VeryLazy",
-	-- 	lazy = false,
-	-- 	version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
-	-- 	opts = {
-	-- 		-- -- add any opts here
-	-- 		-- -- for example
-	-- 		-- provider = "openai",
-	-- 		-- openai = {
-	-- 		-- 	endpoint = "https://api.openai.com/v1",
-	-- 		-- 	model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
-	-- 		-- 	timeout = 30000, -- timeout in milliseconds
-	-- 		-- 	temperature = 0, -- adjust if needed
-	-- 		-- 	max_tokens = 4096,
-	-- 		-- 	reasoning_effort = "high", -- only supported for "o" models
-	-- 		-- },
-	-- 	},
-	-- 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-	-- 	build = "make",
-	-- 	-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-	-- 	dependencies = {
-	-- 		"nvim-treesitter/nvim-treesitter",
-	-- 		"stevearc/dressing.nvim",
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"MunifTanjim/nui.nvim",
-	-- 		--- The below dependencies are optional,
-	-- 		"echasnovski/mini.pick", -- for file_selector provider mini.pick
-	-- 		"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-	-- 		"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-	-- 		"ibhagwan/fzf-lua", -- for file_selector provider fzf
-	-- 		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-	-- 		"zbirenbaum/copilot.lua", -- for providers='copilot'
-	-- 		{
-	-- 			-- support for image pasting
-	-- 			"HakonHarnes/img-clip.nvim",
-	-- 			event = "VeryLazy",
-	-- 			opts = {
-	-- 				-- recommended settings
-	-- 				default = {
-	-- 					embed_image_as_base64 = false,
-	-- 					prompt_for_file_name = false,
-	-- 					drag_and_drop = {
-	-- 						insert_mode = true,
-	-- 					},
-	-- 					-- required for Windows users
-	-- 					use_absolute_path = true,
-	-- 				},
-	-- 			},
-	-- 		},
-	-- 		{
-	-- 			-- Make sure to set this up properly if you have lazy=true
-	-- 			"MeanderingProgrammer/render-markdown.nvim",
-	-- 			opts = {
-	-- 				file_types = { "markdown", "Avante" },
-	-- 			},
-	-- 			ft = { "markdown", "Avante" },
-	-- 		},
-	-- 	},
-	-- },
 	{
-		"olimorris/codecompanion.nvim",
+		"aaronhallaert/advanced-git-search.nvim",
+		cmd = { "AdvancedGitSearch" },
+		config = function()
+			require("advanced_git_search.fzf").setup({
+				-- Browse command to open commits in browser. Default fugitive GBrowse.
+				-- {commit_hash} is the placeholder for the commit hash.
+				browse_command = "GBrowse {commit_hash}",
+				-- when {commit_hash} is not provided, the commit will be appended to the specified command seperated by a space
+				-- browse_command = "GBrowse",
+				-- => both will result in calling `:GBrowse commit`
+
+				-- fugitive or diffview
+				diff_plugin = "fugitive",
+				-- customize git in previewer
+				-- e.g. flags such as { "--no-pager" }, or { "-c", "delta.side-by-side=false" }
+				git_flags = {},
+				-- customize git diff in previewer
+				-- e.g. flags such as { "--raw" }
+				git_diff_flags = {},
+				git_log_flags = {},
+				-- Show builtin git pickers when executing "show_custom_functions" or :AdvancedGitSearch
+				show_builtin_git_pickers = false,
+				entry_default_author_or_date = "author", -- one of "author" or "date"
+				keymaps = {
+					-- following keymaps can be overridden
+					toggle_date_author = "<C-w>",
+					open_commit_in_browser = "<C-o>",
+					copy_commit_hash = "<C-y>",
+					show_entire_commit = "<C-e>",
+				},
+
+				-- Telescope layout setup
+				telescope_theme = {
+					function_name_1 = {
+						-- Theme options
+					},
+					function_name_2 = "dropdown",
+					-- e.g. realistic example
+					show_custom_functions = {
+						layout_config = { width = 0.4, height = 0.4 },
+					},
+				},
+			})
+		end,
 		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-			-- The following are optional:
-			{ "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } },
+			-- Insert Dependencies here
 		},
-		config = true,
 	},
+	{
+		"yetone/avante.nvim",
+		event = "VeryLazy",
+		lazy = false,
+		version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+		opts = {
+			-- -- add any opts here
+			-- -- for example
+			-- provider = "openai",
+			-- openai = {
+			-- 	endpoint = "https://api.openai.com/v1",
+			-- 	model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+			-- 	timeout = 30000, -- timeout in milliseconds
+			-- 	temperature = 0, -- adjust if needed
+			-- 	max_tokens = 4096,
+			-- 	reasoning_effort = "high", -- only supported for "o" models
+			-- },
+		},
+		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+		build = "make",
+		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"stevearc/dressing.nvim",
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			--- The below dependencies are optional,
+			"echasnovski/mini.pick", -- for file_selector provider mini.pick
+			"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+			"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+			"ibhagwan/fzf-lua", -- for file_selector provider fzf
+			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+			"zbirenbaum/copilot.lua", -- for providers='copilot'
+			{
+				-- support for image pasting
+				"HakonHarnes/img-clip.nvim",
+				event = "VeryLazy",
+				opts = {
+					-- recommended settings
+					default = {
+						embed_image_as_base64 = false,
+						prompt_for_file_name = false,
+						drag_and_drop = {
+							insert_mode = true,
+						},
+						-- required for Windows users
+						use_absolute_path = true,
+					},
+				},
+			},
+			{
+				-- Make sure to set this up properly if you have lazy=true
+				"MeanderingProgrammer/render-markdown.nvim",
+				opts = {
+					file_types = { "markdown", "Avante" },
+				},
+				ft = { "markdown", "Avante" },
+			},
+		},
+	},
+	-- {
+	-- 	"olimorris/codecompanion.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 		-- The following are optional:
+	-- 		{ "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } },
+	-- 	},
+	-- 	config = true,
+	-- },
 	{
 		"kawre/leetcode.nvim",
 		build = ":TSUpdate html",
