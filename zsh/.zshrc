@@ -126,6 +126,9 @@ alias ipy='ipython'
 # load file .zsh_env_vars if it exists to set environment
 [ -f ~/.zsh_env_vars ] &&  source ~/.zsh_env_vars || true
 
+# load file .zsh_evite if it exists to set environment
+[ -f ~/.zsh_evite ] &&  source ~/.zsh_evite || true
+
 # enable docker in wsl
 if grep -q "microsoft" /proc/version > /dev/null 2>&1; then
     if service docker status 2>&1 | grep -q "is not running"; then
@@ -140,7 +143,6 @@ if ! docker info >/dev/null 2>&1; then
     open --background -a Docker
 fi
 
-
 # bun stuff
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
@@ -151,15 +153,26 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 eval "$(fzf --zsh)"
 
 ## fzf stuff
-
+#
 # git checkout
 alias gc='git branch | fzf | xargs git checkout'
+# one-liner alias  (mind the nested quotes)
+cgw () {
+  local dir
+  dir=$(
+    git worktree list \
+    | fzf --ansi \
+          --preview 'bash -c "git -C $(echo {} | awk '\''{print $1}'\'') log --graph --decorate --oneline -n 20"' \
+    | awk '{print $1}'
+  ) || return
+  cd "$dir"
+}
 # docker logs
 alias dl="docker ps --format '{{.Names}}' | fzf --preview='docker logs {1} | tail -n 30' | awk '{print \$1}' | xargs docker logs -f"
 # docker attach
-alias da='docker attach "$(docker ps | fzf | awk '\''{print $1}'\'')"'
-alias dx='docker exec -it "$(docker ps | fzf | awk '\''{print $1}'\'')" bash'
- 
+alias da='docker attach "$(docker ps | fzf --preview="docker logs {1}" | awk '\''{print $1}'\'')"'
+alias dx='docker exec -it "$(docker ps | fzf --preview="docker logs {1}"| awk '\''{print $1}'\'')" bash'
+alias dr='docker restart "$(docker ps | fzf --preview="docker logs {1}"| awk '\''{print $1}'\'')"| ECHO "Restarting container..."'
 
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 export ANDROID_HOME=$HOME/Library/Android/sdk
