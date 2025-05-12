@@ -18,7 +18,12 @@ vim.keymap.set("n", "<c-c>", ":BDelete this<cr>")
 -- format code
 vim.keymap.set("n", "<Leader>,", ":lua vim.lsp.buf.format({ async = false })<cr>")
 
---vim.keymap.set('n', "<Leader>o", ":Telescope live_grep<cr>")
+vim.keymap.set(
+	"n",
+	"<Leader>fb",
+	":lua require('telescope.builtin').live_grep({grep_open_files=true})<CR>",
+	{ noremap = true }
+)
 vim.keymap.set("n", "<Leader>ff", ":Telescope find_files<cr>")
 vim.keymap.set("n", "<Leader>fg", ":Telescope git_files<cr>")
 
