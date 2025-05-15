@@ -20,7 +20,7 @@ vim.keymap.set("n", "<Leader>,", ":lua vim.lsp.buf.format({ async = false })<cr>
 
 vim.keymap.set(
 	"n",
-	"<Leader>fb",
+	"<space><space>",
 	":lua require('telescope.builtin').live_grep({grep_open_files=true})<CR>",
 	{ noremap = true }
 )

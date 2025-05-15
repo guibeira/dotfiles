@@ -173,6 +173,27 @@ alias dl="docker ps --format '{{.Names}}' | fzf --preview='docker logs {1} | tai
 alias da='docker attach "$(docker ps | fzf --preview="docker logs {1}" | awk '\''{print $1}'\'')"'
 alias dx='docker exec -it "$(docker ps | fzf --preview="docker logs {1}"| awk '\''{print $1}'\'')" bash'
 alias dr='docker restart "$(docker ps | fzf --preview="docker logs {1}"| awk '\''{print $1}'\'')"| ECHO "Restarting container..."'
+alias dx='docker exec -it "$(docker ps | fzf --preview="docker logs {1}"| awk '\''{print $1}'\'')" bash'
+
+
+# only for mac
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # Requirements
+  # cargo install timer-cli
+  # brew install terminal-notifier
+
+  function notify_timer() {
+    local duration="$1"
+    local message="$2"
+
+    if [[ -z "$duration" || -z "$message" ]]; then
+      echo "Usage: notify_timer <00:00> <message>"
+      return 1
+    fi
+
+    timer "$duration" && echo "$message" | terminal-notifier -sound default
+  }
+fi
 
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 export ANDROID_HOME=$HOME/Library/Android/sdk
