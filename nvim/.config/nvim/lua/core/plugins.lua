@@ -25,15 +25,19 @@ local plugins = {
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
-		commit = "d65087b892c45d3722b6511c83a029671d6290e5",
-		init = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
-		end,
 		opts = {
 			-- your configuration comes here
 			-- or leave it empty to use the default settings
 			-- refer to the configuration section below
+		},
+		keys = {
+			{
+				"<leader>?",
+				function()
+					require("which-key").show({ global = false })
+				end,
+				desc = "Buffer Local Keymaps (which-key)",
+			},
 		},
 	},
 	"nvimtools/none-ls.nvim",
@@ -131,7 +135,7 @@ local plugins = {
 	{ "kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async" },
 	-- open git
 	"ruifm/gitlinker.nvim",
-	-- { "m4xshen/hardtime.nvim", opts = { disable_mouse = false } },
+	{ "m4xshen/hardtime.nvim", opts = { disable_mouse = false } },
 	"nvim-tree/nvim-tree.lua",
 	"nvim-tree/nvim-web-devicons",
 	"nvim-lualine/lualine.nvim",

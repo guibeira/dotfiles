@@ -155,7 +155,7 @@ eval "$(fzf --zsh)"
 ## fzf stuff
 #
 # git checkout
-alias gc='git branch | fzf | xargs git checkout'
+alias gc='git branch --format="%(refname:short)" | fzf | xargs git checkout'
 # one-liner alias  (mind the nested quotes)
 cgw () {
   local dir
