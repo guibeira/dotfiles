@@ -219,10 +219,38 @@ local plugins = {
 	},
 
 	"github/copilot.vim",
-	"williamboman/mason.nvim",
-
+	"mason-org/mason.nvim",
 	"neovim/nvim-lspconfig",
-	"williamboman/mason-lspconfig.nvim",
+	{
+		"mason-org/mason-lspconfig.nvim",
+
+		opts = {
+			automatic_enable = false,
+			ensure_installed = {
+				"cssls",
+				"cmake",
+				"dockerls",
+				"biome",
+				"eslint",
+				"jsonls",
+				"lua_ls",
+				"marksman",
+				"pyright",
+				"pyrefly",
+				"rust_analyzer",
+				"sqlls",
+				"tailwindcss",
+				"ts_ls",
+				"html",
+				"htmx",
+				"jinja_lsp",
+			},
+		},
+		dependencies = {
+			{ "mason-org/mason.nvim", opts = {} },
+			"neovim/nvim-lspconfig",
+		},
+	},
 	"nvimdev/lspsaga.nvim",
 	{
 		"nvim-telescope/telescope.nvim",
@@ -277,6 +305,20 @@ local plugins = {
 		dependencies = {
 			-- Insert Dependencies here
 		},
+	},
+	{
+		"princejoogie/dir-telescope.nvim",
+		-- telescope.nvim is a required dependency
+		requires = { "nvim-telescope/telescope.nvim" },
+		config = function()
+			require("dir-telescope").setup({
+				-- these are the default options set
+				hidden = true,
+				no_ignore = false,
+				show_preview = true,
+				follow_symlinks = false,
+			})
+		end,
 	},
 	{
 		"yetone/avante.nvim",

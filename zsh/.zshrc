@@ -175,6 +175,7 @@ alias dx='docker exec -it "$(docker ps | fzf --preview="docker logs {1}"| awk '\
 alias dr='docker restart "$(docker ps | fzf --preview="docker logs {1}"| awk '\''{print $1}'\'')"| ECHO "Restarting container..."'
 alias dx='docker exec -it "$(docker ps | fzf --preview="docker logs {1}"| awk '\''{print $1}'\'')" bash'
 
+alias terminou="echo 'Terminou' | terminal-notifier -sound default"
 
 # only for mac
 if [[ "$OSTYPE" == "darwin"* ]]; then

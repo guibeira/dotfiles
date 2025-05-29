@@ -4,9 +4,7 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
 	sources = {
 		-- typo
-		-- null_ls.builtins.diagnostics.cspell,
-		-- null_ls.builtins.code_actions.cspell,
-		-- null_ls.builtins.completion.spell,
+		null_ls.builtins.completion.spell,
 		-- docker
 		-- null_ls.builtins.diagnostics.dotenv_linter,
 		-- null_ls.builtins.diagnostics.hadolint,
@@ -17,7 +15,6 @@ null_ls.setup({
 		}),
 		null_ls.builtins.diagnostics.mypy,
 		null_ls.builtins.formatting.djlint,
-		-- null_ls.builtins.formatting.ruff,
 		-- null_ls.builtins.diagnostics.vulture,
 		-- Rust
 		null_ls.builtins.diagnostics.ltrs,

@@ -24,6 +24,8 @@ vim.keymap.set(
 	":lua require('telescope.builtin').live_grep({grep_open_files=true})<CR>",
 	{ noremap = true }
 )
+vim.keymap.set("n", "<leader>fd", "<cmd>Telescope dir live_grep<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>pg", "<cmd>Telescope dir find_files<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader>ff", ":Telescope find_files<cr>")
 vim.keymap.set("n", "<Leader>fg", ":Telescope git_files<cr>")
 
