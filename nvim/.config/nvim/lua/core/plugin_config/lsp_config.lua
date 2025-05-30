@@ -8,7 +8,7 @@ local servers = {
 	"lua_ls",
 	"marksman",
 	"pyright",
-	"rust_analyzer",
+	"bacon-ls",
 	"sqlls",
 	"tailwindcss",
 	"ts_ls",

@@ -163,14 +163,35 @@ local plugins = {
 	"mfussenegger/nvim-dap",
 	{ "rcarriga/nvim-dap-ui", dependencies = "nvim-neotest/nvim-nio" },
 	"mfussenegger/nvim-dap-python",
+	--
+	-- View lines at functions
+
+	{
+		"shellRaining/hlchunk.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("hlchunk").setup({
+				chunk = {
+					enable = true,
+					highlight = "Visual",
+					pattern = [[\%(\s\+\|^\)\@<=\%(\d\+\.\s\+\)\@=]],
+					priority = 1000,
+				},
+				line_num = {
+					style = "#806d9c",
+				},
+			})
+		end,
+	},
 
 	-- rust babyyyyyyy
 	{
 		"mrcjkb/rustaceanvim",
-		version = "^5", -- Recommended
+		version = "^6", -- Recommended
 		lazy = false, -- This plugin is already lazy
 		dependencies = "mattn/webapi-vim",
 	},
+	--
 	{
 		"chrisgrieser/nvim-lsp-endhints",
 		event = "LspAttach",
