@@ -18,11 +18,14 @@ null_ls.setup({
 		-- null_ls.builtins.diagnostics.vulture,
 		--css
 		-- null_ls.builtins.formatting.stylelint,
+		-- rust
+		-- null_ls.builtins.formatting.dxfmt,
+		null_ls.builtins.formatting.leptosfmt,
 		--lua
 		null_ls.builtins.formatting.stylua,
 		-- javascript
-		-- null_ls.builtins.formatting.biome,
-		-- null_ls.builtins.formatting.prettier,
+		null_ls.builtins.formatting.biome,
+		null_ls.builtins.formatting.prettier,
 		-- terraform
 		null_ls.builtins.diagnostics.terraform_validate,
 	},
