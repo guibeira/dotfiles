@@ -6,7 +6,7 @@ vim.keymap.set("n", "<c-l>", ":wincmd l<CR>")
 
 -- Move selected line / block of text in visual mode
 vim.keymap.set("n", "<C-s>", ":w<cr>")
-vim.keymap.set("n", "<S-T>", ":tabnew<cr>")
+vim.keymap.set("n", "<leader>n", ":tabnew<cr>")
 vim.keymap.set("n", "<S-H>", ":bp<cr>")
 vim.keymap.set("n", "<S-L>", ":bn<cr>")
 -- close buffer

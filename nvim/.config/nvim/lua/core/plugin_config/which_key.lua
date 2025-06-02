@@ -19,7 +19,6 @@ wk.add({
 	-- format code
 	--vim.keymap.set("n", "<Leader>,", ":lua vim.lsp.buf.format({ async = false })<cr>")
 	{ "<leader>,", "<cmd>lua vim.lsp.buf.format({ async = false })<cr>", desc = "Format Code" },
-
 	{
 		"<leader>b",
 		group = "buffers",

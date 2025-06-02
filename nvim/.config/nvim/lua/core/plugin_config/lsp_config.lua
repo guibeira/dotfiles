@@ -12,7 +12,6 @@ local servers = {
 	"sqlls",
 	"tailwindcss",
 	"ts_ls",
-	"volar",
 	"html",
 	"htmx",
 	"jinja_lsp",
