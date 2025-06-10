@@ -118,7 +118,7 @@ local plugins = {
 	{ "kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async" },
 	-- open git
 	"ruifm/gitlinker.nvim",
-	{ "m4xshen/hardtime.nvim", opts = { disable_mouse = false } },
+	{ "m4xshen/hardtime.nvim", opts = { disable_mouse = false, max_count = 10 } },
 	"nvim-tree/nvim-tree.lua",
 	"nvim-tree/nvim-web-devicons",
 	"nvim-lualine/lualine.nvim",
@@ -129,7 +129,11 @@ local plugins = {
 	"preservim/vimux",
 	"tpope/vim-fugitive",
 	"tpope/vim-commentary",
-
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
 	{
 		"pwntester/octo.nvim",
 		requires = {
@@ -148,7 +152,6 @@ local plugins = {
 	"mfussenegger/nvim-dap-python",
 	--
 	-- View lines at functions
-
 	{
 		"shellRaining/hlchunk.nvim",
 		event = { "BufReadPre", "BufNewFile" },
@@ -162,6 +165,15 @@ local plugins = {
 				},
 			})
 		end,
+	},
+
+	{
+		"bngarren/checkmate.nvim",
+		ft = "markdown", -- Lazy loads for Markdown files matching patterns in 'files'
+		opts = {
+			-- your configuration here
+			-- or leave empty to use defaults
+		},
 	},
 
 	-- rust babyyyyyyy

@@ -14,7 +14,10 @@ null_ls.setup({
 			extra_args = { "--line-length", "120" },
 		}),
 		null_ls.builtins.diagnostics.mypy,
-		null_ls.builtins.formatting.djlint,
+		null_ls.builtins.diagnostics.djlint,
+		null_ls.builtins.formatting.djlint.with({
+			extra_args = { "--profile", "jinja" },
+		}),
 		-- null_ls.builtins.diagnostics.vulture,
 		--css
 		-- null_ls.builtins.formatting.stylelint,

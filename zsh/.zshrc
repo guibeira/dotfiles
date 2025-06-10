@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -177,6 +177,9 @@ alias dx='docker exec -it "$(docker ps | fzf --preview="docker logs {1}"| awk '\
 
 alias terminou="echo 'Terminou' | terminal-notifier -sound default"
 
+# ai
+export AIDER_EDITOR=nvim
+
 # only for mac
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # Requirements
@@ -206,7 +209,6 @@ export PATH=$PATH:$ANDROID_HOME/cmdline-tools\latest\bin
 
 export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
 export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include"
-
 # pnpm
 export PNPM_HOME="/Users/doggao/Library/pnpm"
 case ":$PATH:" in
