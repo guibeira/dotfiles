@@ -253,7 +253,7 @@ local plugins = {
 				"lua_ls",
 				"marksman",
 				"pyright",
-				"pyrefly",
+				--"pyrefly",
 				"rust_analyzer",
 				"sqlls",
 				"tailwindcss",
@@ -425,6 +425,15 @@ local plugins = {
 			"nvim-treesitter/nvim-treesitter",
 			-- "rcarriga/nvim-notify",
 			"nvim-tree/nvim-web-devicons",
+		},
+		{
+			"rachartier/tiny-inline-diagnostic.nvim",
+			event = "VeryLazy", -- Or `LspAttach`
+			priority = 1000, -- needs to be loaded in first
+			config = function()
+				require("tiny-inline-diagnostic").setup()
+				vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
+			end,
 		},
 		{
 			"folke/zen-mode.nvim",

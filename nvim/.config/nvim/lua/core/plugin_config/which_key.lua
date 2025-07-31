@@ -9,7 +9,8 @@ wk.add({
 		end,
 		desc = "Foobar",
 	},
-	{ "<leader>fn", desc = "New File" },
+	{ "<leader>ga", "<cmd>Gitsigns stage_buffer<cr>", desc = "Stage File" },
+	{ "<leader>gc", "<cmd>Gitsigns reset_buffer  <cr>", desc = "Reset changes from the file" },
 	{ "<leader>f1", hidden = true }, -- hide this keymap
 	{ "<leader>w", proxy = "<c-w>", group = "windows" }, -- proxy to window mappings
 
