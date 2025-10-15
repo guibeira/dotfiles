@@ -14,6 +14,29 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
+	-- { -- neovide cursor trail
+	--   "sphamba/smear-cursor.nvim",
+
+	--   opts = {
+	--     -- Smear cursor when switching buffers or windows.
+	--     smear_between_buffers = true,
+
+	--     -- Smear cursor when moving within line or to neighbor lines.
+	--     -- Use `min_horizontal_distance_smear` and `min_vertical_distance_smear` for finer control
+	--     smear_between_neighbor_lines = true,
+
+	--     -- Draw the smear in buffer space instead of screen space when scrolling
+	--     scroll_buffer_space = true,
+
+	--     -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
+	--     -- Smears will blend better on all backgrounds.
+	--     legacy_computing_symbols_support = false,
+
+	--     -- Smear cursor in insert mode.
+	--     -- See also `vertical_bar_cursor_insert_mode` and `distance_stop_animating_vertical_bar`.
+	--     smear_insert_mode = true,
+	--   },
+	-- },
 	"wbthomason/packer.nvim",
 	"ellisonleao/gruvbox.nvim",
 	"rebelot/kanagawa.nvim",
@@ -147,9 +170,9 @@ local plugins = {
 		end,
 	},
 	-- debug
-	"mfussenegger/nvim-dap",
-	{ "rcarriga/nvim-dap-ui", dependencies = "nvim-neotest/nvim-nio" },
-	"mfussenegger/nvim-dap-python",
+	-- "mfussenegger/nvim-dap",
+	-- { "rcarriga/nvim-dap-ui", dependencies = "nvim-neotest/nvim-nio" },
+	-- "mfussenegger/nvim-dap-python",
 	--
 	-- View lines at functions
 	{
@@ -200,11 +223,10 @@ local plugins = {
 	-- markdown preview
 	{
 		"iamcco/markdown-preview.nvim",
-		run = "cd app && npm install",
-		setup = function()
-			vim.g.mkdp_filetypes = {
-				"markdown",
-			}
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		build = "cd app && yarn install",
+		init = function()
+			vim.g.mkdp_filetypes = { "markdown" }
 		end,
 		ft = { "markdown" },
 	},
@@ -272,7 +294,26 @@ local plugins = {
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.5",
-		dependencies = { { "nvim-lua/plenary.nvim" } },
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{
+				"nvim-telescope/telescope-live-grep-args.nvim",
+				-- This will not install any breaking changes.
+				-- For major updates, this must be adjusted manually.
+				version = "^1.0.0",
+			},
+		},
+		config = function()
+			local telescope = require("telescope")
+
+			-- first setup telescope
+			telescope.setup({
+				-- your config
+			})
+
+			-- then load the extension
+			telescope.load_extension("live_grep_args")
+		end,
 	},
 	{
 		"aaronhallaert/advanced-git-search.nvim",
