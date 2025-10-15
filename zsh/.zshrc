@@ -222,3 +222,4 @@ if [ -f '/Users/doggao/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/doggao/g
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/doggao/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/doggao/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"

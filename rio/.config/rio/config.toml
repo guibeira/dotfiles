@@ -1,5 +1,7 @@
 [cursor]
 shape = 'beam'
+blinking-interval = 800
+blinking-cursor = true
 
 [colors]
 background = '#1e1e2e'
@@ -24,7 +26,6 @@ light_magenta = '#f2aede'
 light_cyan = '#6bd7ca'
 light_white = '#bac2de'
 
-blinking-cursor = false
 option-as-alt = 'left'
 
 [fonts]
