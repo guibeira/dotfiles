@@ -15,6 +15,7 @@ local servers = {
 	"html",
 	"htmx",
 	"jinja_lsp",
+	"proton_ls",
 	-- "pyrefly",
 }
 

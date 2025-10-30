@@ -1,3 +1,5 @@
-theme = ayu
+theme = iTerm2 Solarized Dark
 font-family ="Mononoki Nerd Font"
 font-size =22
+
+custom-shader = shaders/cursor_warp.glsl
