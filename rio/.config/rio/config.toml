@@ -30,8 +30,10 @@ option-as-alt = 'left'
 
 [fonts]
 #family = "ComicShannsMono Nerd Font"
-family = "Mononoki Nerd Font"
-size = 22
+fonts.disable-warnings-not-found = true
+#family = "Mononoki Nerd Font"
+use-drawable-chars = true
+size = 16
 
 
 [keyboard]
@@ -52,11 +54,12 @@ disable-unfocused-render = false
 
 
 [window]
-width = 2560
-height = 1440
+width = 1920
+height = 1080
 mode = "Windowed"
 #opacity = 0.5
 opacity = 0.5
 blur = true
-decorations = "Transparent"
+#decorations = "Transparent"
+#decorations = "Buttonless"
 #decorations = "Disabled"

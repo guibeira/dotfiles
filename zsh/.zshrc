@@ -168,14 +168,15 @@ cgw () {
   cd "$dir"
 }
 # docker logs
-alias dl="docker ps --format '{{.Names}}' | fzf --preview='docker logs {1} | tail -n 30' | awk '{print \$1}' | xargs docker logs -f"
+alias dl="docker ps --format '{{.Names}}' | fzf --preview='docker logs {1} | tail -n 30' | awk '{print \$1}' | xargs docker logs -f | tspin"
 # docker attach
-alias da='docker attach "$(docker ps | fzf --preview="docker logs {1}" | awk '\''{print $1}'\'')"'
-alias dx='docker exec -it "$(docker ps | fzf --preview="docker logs {1}"| awk '\''{print $1}'\'')" bash'
-alias dr='docker restart "$(docker ps | fzf --preview="docker logs {1}"| awk '\''{print $1}'\'')"| ECHO "Restarting container..."'
-alias dx='docker exec -it "$(docker ps | fzf --preview="docker logs {1}"| awk '\''{print $1}'\'')" bash'
+alias da='docker attach "$(docker ps | fzf --preview="docker logs {1}" | awk '\''{print $1}'\''| tspin) "'
+alias dr='docker restart "$(docker ps | fzf --preview="docker logs {1}"| awk '\''{print $1}'\''| tspin) "| ECHO "Restarting container..."'
+#alias dx='docker exec -it "$(docker ps | fzf --preview="docker logs {1}"| awk '\''{print $1}'\'')" bash'
 
 alias terminou="echo 'Terminou' | terminal-notifier -sound default"
+
+alias journal='nvim --cmd "let g:copilot_enabled = 0"  ~/.journal'
 
 # ai
 export AIDER_EDITOR=nvim
@@ -223,3 +224,6 @@ if [ -f '/Users/doggao/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/doggao/g
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/doggao/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/doggao/google-cloud-sdk/completion.zsh.inc'; fi
 export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/doggao/.antigravity/antigravity/bin:$PATH"

@@ -1,5 +1,7 @@
 theme = iTerm2 Solarized Dark
-font-family ="Mononoki Nerd Font"
-font-size =22
+font-family ="Comic Mono Normal"
+font-size=16
 
 custom-shader = shaders/cursor_warp.glsl
+window-vsync=false
+window-decoration=none
