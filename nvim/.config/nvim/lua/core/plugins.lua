@@ -141,7 +141,7 @@ local plugins = {
 	{ "kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async" },
 	-- open git
 	"ruifm/gitlinker.nvim",
-	{ "m4xshen/hardtime.nvim", opts = { disable_mouse = false, max_count = 10 } },
+	--{ "m4xshen/hardtime.nvim", opts = { disable_mouse = false, max_count = 10 } },
 	"nvim-tree/nvim-tree.lua",
 	"nvim-tree/nvim-web-devicons",
 	"nvim-lualine/lualine.nvim",
@@ -201,6 +201,13 @@ local plugins = {
 
 	-- rust babyyyyyyy
 	{
+		"saecki/crates.nvim",
+		tag = "stable",
+		config = function()
+			require("crates").setup()
+		end,
+	},
+	{
 		"mrcjkb/rustaceanvim",
 		version = "^6", -- Recommended
 		lazy = false, -- This plugin is already lazy
@@ -212,14 +219,6 @@ local plugins = {
 		event = "LspAttach",
 		opts = {}, -- required, even if empty
 	},
-	-- {
-	-- 	"cordx56/rustowl",
-	-- 	version = "*", -- Latest stable version
-	-- 	build = "cd rustowl && cargo install --path . -F installer --locked",
-	-- 	lazy = false, -- This plugin is already lazy
-	-- 	opts = {},
-	-- },
-
 	-- markdown preview
 	{
 		"iamcco/markdown-preview.nvim",
@@ -378,66 +377,122 @@ local plugins = {
 			})
 		end,
 	},
-	-- {
-	-- 	"yetone/avante.nvim",
-	-- 	event = "VeryLazy",
-	-- 	lazy = false,
-	-- 	version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
-	-- 	opts = {
-	-- 		-- -- add any opts here
-	-- 		-- -- for example
-	-- 		provider = "copilot",
-	-- 		-- openai = {
-	-- 		-- 	endpoint = "https://api.openai.com/v1",
-	-- 		-- 	model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
-	-- 		-- 	timeout = 30000, -- timeout in milliseconds
-	-- 		-- 	temperature = 0, -- adjust if needed
-	-- 		-- 	max_tokens = 4096,
-	-- 		-- 	reasoning_effort = "high", -- only supported for "o" models
-	-- 		-- },
-	-- 	},
-	-- 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-	-- 	build = "make",
-	-- 	-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-	-- 	dependencies = {
-	-- 		"nvim-treesitter/nvim-treesitter",
-	-- 		"stevearc/dressing.nvim",
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"MunifTanjim/nui.nvim",
-	-- 		--- The below dependencies are optional,
-	-- 		"echasnovski/mini.pick", -- for file_selector provider mini.pick
-	-- 		"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-	-- 		"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-	-- 		"ibhagwan/fzf-lua", -- for file_selector provider fzf
-	-- 		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-	-- 		"zbirenbaum/copilot.lua", -- for providers='copilot'
-	-- 		{
-	-- 			-- support for image pasting
-	-- 			"HakonHarnes/img-clip.nvim",
-	-- 			event = "VeryLazy",
-	-- 			opts = {
-	-- 				-- recommended settings
-	-- 				default = {
-	-- 					embed_image_as_base64 = false,
-	-- 					prompt_for_file_name = false,
-	-- 					drag_and_drop = {
-	-- 						insert_mode = true,
-	-- 					},
-	-- 					-- required for Windows users
-	-- 					use_absolute_path = true,
-	-- 				},
-	-- 			},
-	-- 		},
-	-- 		{
-	-- 			-- Make sure to set this up properly if you have lazy=true
-	-- 			"MeanderingProgrammer/render-markdown.nvim",
-	-- 			opts = {
-	-- 				file_types = { "markdown", "Avante" },
-	-- 			},
-	-- 			ft = { "markdown", "Avante" },
-	-- 		},
-	-- 	},
-	--	},
+	{
+		"esmuellert/vscode-diff.nvim",
+		dependencies = { "MunifTanjim/nui.nvim" },
+		cmd = "CodeDiff",
+		config = function()
+			require("vscode-diff").setup({
+				-- Highlight configuration
+				highlights = {
+					-- Line-level: accepts highlight group names or hex colors (e.g., "#2ea043")
+					line_insert = "DiffAdd", -- Line-level insertions
+					line_delete = "DiffDelete", -- Line-level deletions
+
+					-- Character-level: accepts highlight group names or hex colors
+					-- If specified, these override char_brightness calculation
+					char_insert = nil, -- Character-level insertions (nil = auto-derive)
+					char_delete = nil, -- Character-level deletions (nil = auto-derive)
+
+					-- Brightness multiplier (only used when char_insert/char_delete are nil)
+					-- nil = auto-detect based on background (1.4 for dark, 0.92 for light)
+					char_brightness = nil, -- Auto-adjust based on your colorscheme
+				},
+
+				-- Diff view behavior
+				diff = {
+					disable_inlay_hints = true, -- Disable inlay hints in diff windows for cleaner view
+					max_computation_time_ms = 5000, -- Maximum time for diff computation (VSCode default)
+				},
+
+				-- Explorer panel configuration
+				explorer = {
+					position = "left", -- "left" or "bottom"
+					width = 40, -- Width when position is "left" (columns)
+					height = 15, -- Height when position is "bottom" (lines)
+					indent_markers = true, -- Show indent markers in tree view (│, ├, └)
+					icons = {
+						folder_closed = "", -- Nerd Font folder icon (customize as needed)
+						folder_open = "", -- Nerd Font folder-open icon
+					},
+					view_mode = "list", -- "list" or "tree"
+					file_filter = {
+						ignore = {}, -- Glob patterns to hide (e.g., {"*.lock", "dist/*"})
+					},
+				},
+
+				-- Keymaps in diff view
+				keymaps = {
+					view = {
+						quit = "q", -- Close diff tab
+						toggle_explorer = "<leader>b", -- Toggle explorer visibility (explorer mode only)
+						next_hunk = "]c", -- Jump to next change
+						prev_hunk = "[c", -- Jump to previous change
+						next_file = "]f", -- Next file in explorer mode
+						prev_file = "[f", -- Previous file in explorer mode
+						diff_get = "do", -- Get change from other buffer (like vimdiff)
+						diff_put = "dp", -- Put change to other buffer (like vimdiff)
+					},
+					explorer = {
+						select = "<CR>", -- Open diff for selected file
+						hover = "K", -- Show file diff preview
+						refresh = "R", -- Refresh git status
+						toggle_view_mode = "i", -- Toggle between 'list' and 'tree' views
+					},
+				},
+			})
+		end,
+	},
+	{
+		"yetone/avante.nvim",
+		event = "VeryLazy",
+		lazy = false,
+		version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+		opts = {
+			provider = "openai",
+		},
+		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+		build = "make",
+		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"stevearc/dressing.nvim",
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			--- The below dependencies are optional,
+			"echasnovski/mini.pick", -- for file_selector provider mini.pick
+			"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+			"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+			"ibhagwan/fzf-lua", -- for file_selector provider fzf
+			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+			"zbirenbaum/copilot.lua", -- for providers='copilot'
+			{
+				-- support for image pasting
+				"HakonHarnes/img-clip.nvim",
+				event = "VeryLazy",
+				opts = {
+					-- recommended settings
+					default = {
+						embed_image_as_base64 = false,
+						prompt_for_file_name = false,
+						drag_and_drop = {
+							insert_mode = true,
+						},
+						-- required for Windows users
+						use_absolute_path = true,
+					},
+				},
+			},
+			{
+				-- Make sure to set this up properly if you have lazy=true
+				"MeanderingProgrammer/render-markdown.nvim",
+				opts = {
+					file_types = { "markdown", "Avante" },
+				},
+				ft = { "markdown", "Avante" },
+			},
+		},
+	},
 	-- {
 	-- 	"olimorris/codecompanion.nvim",
 	-- 	dependencies = {
