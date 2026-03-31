@@ -1,7 +1,13 @@
 theme = iTerm2 Solarized Dark
-font-family ="Comic Mono Normal"
+theme = Builtin Solarized Light
+theme = Coffee Theme
+theme = Gruvbox Light Hard
+theme =  Cyberpunk
+font-family ="UbuntuMono Nerd Font"
+
 font-size=16
 
 custom-shader = shaders/cursor_warp.glsl
 window-vsync=false
 window-decoration=none
+window-vsync=true

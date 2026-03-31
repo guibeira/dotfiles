@@ -1,2 +1,2 @@
 vim.o.termguicolors = true
-vim.cmd([[ colorscheme kanagawa-lotus ]])
+vim.cmd([[ colorscheme nightfly ]])

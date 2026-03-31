@@ -31,6 +31,7 @@ option-as-alt = 'left'
 [fonts]
 #family = "ComicShannsMono Nerd Font"
 fonts.disable-warnings-not-found = true
+family = "UbuntuMono Nerd Font"
 #family = "Mononoki Nerd Font"
 use-drawable-chars = true
 size = 16

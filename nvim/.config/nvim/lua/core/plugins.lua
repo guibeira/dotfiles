@@ -221,13 +221,23 @@ local plugins = {
 	},
 	-- markdown preview
 	{
+		-- Install markdown preview, use npx if available.
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		build = "cd app && yarn install",
-		init = function()
-			vim.g.mkdp_filetypes = { "markdown" }
-		end,
 		ft = { "markdown" },
+		build = function(plugin)
+			if vim.fn.executable("npx") then
+				vim.cmd("!cd " .. plugin.dir .. " && cd app && npx --yes yarn install")
+			else
+				vim.cmd([[Lazy load markdown-preview.nvim]])
+				vim.fn["mkdp#util#install"]()
+			end
+		end,
+		init = function()
+			if vim.fn.executable("npx") then
+				vim.g.mkdp_filetypes = { "markdown" }
+			end
+		end,
 	},
 	{
 		"toppair/peek.nvim",
@@ -256,7 +266,6 @@ local plugins = {
 		},
 	},
 
-	"github/copilot.vim",
 	"mason-org/mason.nvim",
 	"neovim/nvim-lspconfig",
 	{
@@ -378,11 +387,11 @@ local plugins = {
 		end,
 	},
 	{
-		"esmuellert/vscode-diff.nvim",
+		"esmuellert/codediff.nvim",
 		dependencies = { "MunifTanjim/nui.nvim" },
 		cmd = "CodeDiff",
 		config = function()
-			require("vscode-diff").setup({
+			require("codediff").setup({
 				-- Highlight configuration
 				highlights = {
 					-- Line-level: accepts highlight group names or hex colors (e.g., "#2ea043")
@@ -397,20 +406,32 @@ local plugins = {
 					-- Brightness multiplier (only used when char_insert/char_delete are nil)
 					-- nil = auto-detect based on background (1.4 for dark, 0.92 for light)
 					char_brightness = nil, -- Auto-adjust based on your colorscheme
+
+					-- Conflict sign highlights (for merge conflict views)
+					-- Accepts highlight group names or hex colors (e.g., "#f0883e")
+					-- nil = use default fallback chain
+					conflict_sign = nil, -- Unresolved: DiagnosticSignWarn -> #f0883e
+					conflict_sign_resolved = nil, -- Resolved: Comment -> #6e7681
+					conflict_sign_accepted = nil, -- Accepted: GitSignsAdd -> DiagnosticSignOk -> #3fb950
+					conflict_sign_rejected = nil, -- Rejected: GitSignsDelete -> DiagnosticSignError -> #f85149
 				},
 
 				-- Diff view behavior
 				diff = {
 					disable_inlay_hints = true, -- Disable inlay hints in diff windows for cleaner view
 					max_computation_time_ms = 5000, -- Maximum time for diff computation (VSCode default)
+					hide_merge_artifacts = false, -- Hide merge tool temp files (*.orig, *.BACKUP.*, *.BASE.*, *.LOCAL.*, *.REMOTE.*)
+					original_position = "left", -- Position of original (old) content: "left" or "right"
+					conflict_ours_position = "right", -- Position of ours (:2) in conflict view: "left" or "right"
 				},
 
 				-- Explorer panel configuration
 				explorer = {
-					position = "left", -- "left" or "bottom"
+					position = "bottom", -- "left" or "bottom"
 					width = 40, -- Width when position is "left" (columns)
 					height = 15, -- Height when position is "bottom" (lines)
 					indent_markers = true, -- Show indent markers in tree view (│, ├, └)
+					initial_focus = "explorer", -- Initial focus: "explorer", "original", or "modified"
 					icons = {
 						folder_closed = "", -- Nerd Font folder icon (customize as needed)
 						folder_open = "", -- Nerd Font folder-open icon
@@ -419,6 +440,15 @@ local plugins = {
 					file_filter = {
 						ignore = {}, -- Glob patterns to hide (e.g., {"*.lock", "dist/*"})
 					},
+				},
+
+				-- History panel configuration (for :CodeDiff history)
+				history = {
+					position = "bottom", -- "left" or "bottom" (default: bottom)
+					width = 40, -- Width when position is "left" (columns)
+					height = 15, -- Height when position is "bottom" (lines)
+					initial_focus = "history", -- Initial focus: "history", "original", or "modified"
+					view_mode = "list", -- "list" or "tree" for files under commits
 				},
 
 				-- Keymaps in diff view
@@ -432,77 +462,60 @@ local plugins = {
 						prev_file = "[f", -- Previous file in explorer mode
 						diff_get = "do", -- Get change from other buffer (like vimdiff)
 						diff_put = "dp", -- Put change to other buffer (like vimdiff)
+						toggle_stage = "-", -- Stage/unstage current file (works in explorer and diff buffers)
 					},
 					explorer = {
 						select = "<CR>", -- Open diff for selected file
 						hover = "K", -- Show file diff preview
 						refresh = "R", -- Refresh git status
 						toggle_view_mode = "i", -- Toggle between 'list' and 'tree' views
+						stage_all = "S", -- Stage all files
+						unstage_all = "U", -- Unstage all files
+						restore = "X", -- Discard changes (restore file)
+					},
+					history = {
+						select = "<CR>", -- Select commit/file or toggle expand
+						toggle_view_mode = "i", -- Toggle between 'list' and 'tree' views
+					},
+					conflict = {
+						accept_incoming = "<leader>ct", -- Accept incoming (theirs/left) change
+						accept_current = "<leader>co", -- Accept current (ours/right) change
+						accept_both = "<leader>cb", -- Accept both changes (incoming first)
+						discard = "<leader>cx", -- Discard both, keep base
+						next_conflict = "]x", -- Jump to next conflict
+						prev_conflict = "[x", -- Jump to previous conflict
+						diffget_incoming = "2do", -- Get hunk from incoming (left/theirs) buffer
+						diffget_current = "3do", -- Get hunk from current (right/ours) buffer
 					},
 				},
 			})
 		end,
 	},
 	{
-		"yetone/avante.nvim",
-		event = "VeryLazy",
-		lazy = false,
-		version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
-		opts = {
-			provider = "openai",
+		"zbirenbaum/copilot.lua",
+		requires = {
+			"copilotlsp-nvim/copilot-lsp", -- (optional) for NES functionality
 		},
-		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-		build = "make",
-		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"stevearc/dressing.nvim",
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			--- The below dependencies are optional,
-			"echasnovski/mini.pick", -- for file_selector provider mini.pick
-			"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-			"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-			"ibhagwan/fzf-lua", -- for file_selector provider fzf
-			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-			"zbirenbaum/copilot.lua", -- for providers='copilot'
-			{
-				-- support for image pasting
-				"HakonHarnes/img-clip.nvim",
-				event = "VeryLazy",
-				opts = {
-					-- recommended settings
-					default = {
-						embed_image_as_base64 = false,
-						prompt_for_file_name = false,
-						drag_and_drop = {
-							insert_mode = true,
-						},
-						-- required for Windows users
-						use_absolute_path = true,
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = function()
+			require("copilot").setup({
+				suggestion = {
+					enabled = true,
+					auto_trigger = true,
+					keymap = {
+						accept = "<Tab>",
+						accept_word = false,
+						accept_line = false,
+						next = "<M-]>",
+						prev = "<M-[>",
+						dismiss = "<C-]>",
 					},
 				},
-			},
-			{
-				-- Make sure to set this up properly if you have lazy=true
-				"MeanderingProgrammer/render-markdown.nvim",
-				opts = {
-					file_types = { "markdown", "Avante" },
-				},
-				ft = { "markdown", "Avante" },
-			},
-		},
+				panel = { enabled = false },
+			})
+		end,
 	},
-	-- {
-	-- 	"olimorris/codecompanion.nvim",
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"nvim-treesitter/nvim-treesitter",
-	-- 		-- The following are optional:
-	-- 		{ "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } },
-	-- 	},
-	-- 	config = true,
-	-- },
 	{
 		"kawre/leetcode.nvim",
 		build = ":TSUpdate html",
@@ -534,9 +547,26 @@ local plugins = {
 		{
 			"folke/zen-mode.nvim",
 			opts = {
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
+				window = {
+					backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+					-- height and width can be:
+					-- * an absolute number of cells when > 1
+					-- * a percentage of the width / height of the editor when <= 1
+					-- * a function that returns the width or the height
+					width = 140, -- width of the Zen window
+					height = 1, -- height of the Zen window
+					-- by default, no options are changed for the Zen window
+					-- uncomment any of the options below, or add other vim.wo options you want to apply
+					options = {
+						-- signcolumn = "no", -- disable signcolumn
+						-- number = false, -- disable number column
+						-- relativenumber = false, -- disable relative numbers
+						-- cursorline = false, -- disable cursorline
+						-- cursorcolumn = false, -- disable cursor column
+						-- foldcolumn = "0", -- disable fold column
+						-- list = false, -- disable whitespace characters
+					},
+				},
 			},
 		},
 	},

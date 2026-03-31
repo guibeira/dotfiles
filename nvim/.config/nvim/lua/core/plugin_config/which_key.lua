@@ -27,6 +27,8 @@ wk.add({
 			return require("which-key.extras").expand.buf()
 		end,
 	},
+	-- zenmode
+	{ "<leader>zm", "<cmd>ZenMode<cr>", desc = "Toggle Zen Mode" },
 	-- codecompanions
 	{ "<C-a>", "<cmd>CodeCompanionActions<cr>", desc = "Code Companion Actions", mode = { "n", "v" } },
 	{ "<LocalLeader>a", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle Code Companion Chat", mode = { "n", "v" } },
