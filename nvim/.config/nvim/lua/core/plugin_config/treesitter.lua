@@ -1,28 +1,56 @@
-require("nvim-treesitter.configs").setup({
-	-- A list of parser names, or "all"
-	ensure_installed = {
+local ok, ts = pcall(require, "nvim-treesitter")
+if not ok or type(ts.install) ~= "function" then
+	vim.schedule(function()
+		vim.notify(
+			"nvim-treesitter rewrite not installed yet. Run :Lazy update nvim-treesitter",
+			vim.log.levels.WARN
+		)
+	end)
+	return
+end
+
+local parsers = {
+	"bash",
+	"c",
+	"css",
+	"javascript",
+	"json",
+	"lua",
+	"markdown",
+	"markdown_inline",
+	"python",
+	"rust",
+	"toml",
+	"tsx",
+	"typescript",
+	"vim",
+	"vue",
+	"yaml",
+}
+
+ts.install(parsers)
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = {
 		"bash",
+		"sh",
 		"c",
 		"css",
 		"javascript",
+		"javascriptreact",
 		"json",
 		"lua",
 		"markdown",
-		"markdown_inline",
 		"python",
 		"rust",
 		"toml",
-		"tsx",
 		"typescript",
+		"typescriptreact",
 		"vim",
 		"vue",
 		"yaml",
 	},
-
-	-- Install parsers synchronously (only applied to `ensure_installed`)
-	sync_install = true,
-	auto_install = true,
-	highlight = {
-		enable = true,
-	},
+	callback = function()
+		pcall(vim.treesitter.start)
+	end,
 })

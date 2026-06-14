@@ -19,6 +19,24 @@ local servers = {
 	-- "pyrefly",
 }
 
+-- III Engine LSP (custom, not managed by mason)
+local lspconfig = require("lspconfig")
+local configs = require("lspconfig.configs")
+if not configs.iii_lsp then
+	configs.iii_lsp = {
+		default_config = {
+			--cmd = { "/Users/doggao/personal/workers/iii-lsp/target/release/iii-lsp" },
+			cmd = { "/Users/doggao/personal/workers/iii-lsp/target/release/iii-lsp" },
+
+			filetypes = { "typescript", "typescriptreact", "python", "rust" },
+			root_dir = function(fname)
+				return lspconfig.util.find_git_ancestor(fname) or vim.fn.getcwd()
+			end,
+		},
+	}
+end
+lspconfig.iii_lsp.setup({})
+
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 for _, server in ipairs(servers) do

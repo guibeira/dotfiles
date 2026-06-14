@@ -131,7 +131,15 @@ local plugins = {
 			"nvim-telescope/telescope.nvim",
 		},
 	},
-	{ "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" }, -- if you use the mini.nvim suite
+		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' },        -- if you use standalone mini plugins
+		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+		---@module 'render-markdown'
+		---@type render.md.UserConfig
+		opts = {},
+	},
 	{ "akinsho/git-conflict.nvim", version = "*", config = true },
 	{
 		"akinsho/bufferline.nvim",
@@ -145,7 +153,11 @@ local plugins = {
 	"nvim-tree/nvim-tree.lua",
 	"nvim-tree/nvim-web-devicons",
 	"nvim-lualine/lualine.nvim",
-	"nvim-treesitter/nvim-treesitter",
+	{
+		"nvim-treesitter/nvim-treesitter",
+		lazy = false,
+		build = ":TSUpdate",
+	},
 	"bluz71/vim-nightfly-colors",
 	"vim-test/vim-test",
 	"lewis6991/gitsigns.nvim",
@@ -427,7 +439,7 @@ local plugins = {
 
 				-- Explorer panel configuration
 				explorer = {
-					position = "bottom", -- "left" or "bottom"
+					position = "left", -- "left" or "bottom"
 					width = 40, -- Width when position is "left" (columns)
 					height = 15, -- Height when position is "bottom" (lines)
 					indent_markers = true, -- Show indent markers in tree view (│, ├, └)
@@ -489,6 +501,25 @@ local plugins = {
 					},
 				},
 			})
+		end,
+	},
+	{
+		url = "https://codeberg.org/yaadata/codex.nvim.git",
+		version = "1.0.0",
+		cmd = {
+			"Codex",
+			"CodexFocus",
+			"CodexClose",
+			"CodexClearInput",
+			"CodexSendSelection",
+			"CodexSendFile",
+			"CodexMentionFile",
+			"CodexMentionDirectory",
+			"CodexResume",
+		},
+		opts = {},
+		config = function(_, opts)
+			require("codex").setup(opts)
 		end,
 	},
 	{
