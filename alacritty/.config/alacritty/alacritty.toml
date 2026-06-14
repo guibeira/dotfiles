@@ -71,3 +71,8 @@ save_to_clipboard = false
 [cursor]
 style = { shape = "Block", blinking = "Off" }
 unfocused_hollow = true
+smooth_motion = true
+smooth_motion_factor = 0.4
+smooth_motion_spring = 0.8
+smooth_motion_max_stretch_x = 3.0
+smooth_motion_max_stretch_y = 2.0
