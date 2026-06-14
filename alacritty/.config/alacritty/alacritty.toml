@@ -1,0 +1,73 @@
+[general]
+live_config_reload = true
+working_directory = "None"
+
+[window]
+dimensions = { columns = 0, lines = 0 }
+padding = { x = 0, y = 0 }
+dynamic_padding = false
+decorations = "None"
+opacity = 1.0
+startup_mode = "Windowed"
+title = "Terminalzão"
+dynamic_title = true
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[font]
+normal = { family = "UbuntuMono Nerd Font", style = "Regular" }
+size = 18.0
+offset = { x = 0, y = 0 }
+glyph_offset = { x = 0, y = 0 }
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.primary]
+background = "#002b36"
+foreground = "#839496"
+
+[colors.cursor]
+text = "#002b36"
+cursor = "#839496"
+
+[colors.normal]
+black = "#073642"
+red = "#dc322f"
+green = "#859900"
+yellow = "#b58900"
+blue = "#268bd2"
+magenta = "#d33682"
+cyan = "#2aa198"
+white = "#eee8d5"
+
+[colors.bright]
+black = "#586e75"
+red = "#cb4b16"
+green = "#586e75"
+yellow = "#657b83"
+blue = "#839496"
+magenta = "#6c71c4"
+cyan = "#93a1a1"
+white = "#fdf6e3"
+
+[bell]
+animation = "EaseOutExpo"
+duration = 0
+color = "#ffffff"
+
+[mouse]
+hide_when_typing = false
+bindings = [
+  { mouse = "Middle", action = "PasteSelection" },
+]
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
+save_to_clipboard = false
+
+[cursor]
+style = { shape = "Block", blinking = "Off" }
+unfocused_hollow = true
