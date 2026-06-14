@@ -332,6 +332,11 @@ tmux_conf_copy_to_os_clipboard=true
 # start with mouse mode enabled
 set -g mouse on
 
+# smooth out mouse wheel and trackpad scrolling
+set -g @scroll-speed-num-lines-per-scroll 1
+set -g @emulate-scroll-for-no-mouse-alternate-buffer on
+set -g @mighty-scroll-interval 1
+
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
 #set -g status-keys vi
