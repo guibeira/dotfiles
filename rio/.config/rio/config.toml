@@ -1,7 +1,8 @@
 [cursor]
-shape = 'beam'
-blinking-interval = 800
-blinking-cursor = true
+# shape = 'beam'
+# blinking-interval = 800
+# blinking-cursor = true
+trail-cursor=false
 
 [colors]
 background = '#1e1e2e'
@@ -34,7 +35,7 @@ fonts.disable-warnings-not-found = true
 family = "UbuntuMono Nerd Font"
 #family = "Mononoki Nerd Font"
 use-drawable-chars = true
-size = 16
+size = 22
 
 
 [keyboard]
