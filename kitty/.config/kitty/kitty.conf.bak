@@ -1528,6 +1528,6 @@ hide_window_decorations yes
 
 
 # BEGIN_KITTY_THEME
-# Ayu Mirage
+# Solarized Dark
 include current-theme.conf
 # END_KITTY_THEME
