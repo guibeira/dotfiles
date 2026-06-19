@@ -1,4 +1,11 @@
 require("telescope").setup({
+	defaults = {
+		-- nvim-treesitter rewrite (branch main) removeu a API antiga que o
+		-- telescope usa p/ highlight no preview; cai no syntax regex do vim.
+		preview = {
+			treesitter = false,
+		},
+	},
 	pickers = {
 		colorscheme = {
 			enable_preview = true,

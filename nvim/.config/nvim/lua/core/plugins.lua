@@ -328,7 +328,14 @@ local plugins = {
 
 			-- first setup telescope
 			telescope.setup({
-				-- your config
+				-- nvim-treesitter rewrite (branch main) removeu a API antiga
+				-- (ft_to_lang/get_parser) que telescope 0.1.5 usa p/ highlight
+				-- no preview; desliga ts e cai no syntax regex do vim.
+				defaults = {
+					preview = {
+						treesitter = false,
+					},
+				},
 			})
 
 			-- then load the extension
