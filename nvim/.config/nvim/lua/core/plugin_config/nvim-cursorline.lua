@@ -5,7 +5,9 @@ require('nvim-cursorline').setup {
     number = false,
   },
   cursorword = {
-    enable = true,
+    -- re-highlights every occurrence of the word on each cursor move ->
+    -- churn while scrolling. Disabled for smooth scroll.
+    enable = false,
     min_length = 3,
     hl = { underline = true },
   }
