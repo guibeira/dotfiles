@@ -342,6 +342,15 @@ set -g @mighty-scroll-interval 1
 #set -g status-keys vi
 set -g mode-keys vi
 
+# Keep copy-mode open after copying to the macOS clipboard.
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-no-clear pbcopy
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-no-clear pbcopy
+bind-key -T copy-mode-vi C-j send-keys -X copy-pipe-no-clear pbcopy
+bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-no-clear pbcopy
+bind-key -T copy-mode-vi DoubleClick1Pane select-pane \; send-keys -X select-word \; run-shell -d 0.3 \; send-keys -X copy-pipe-no-clear pbcopy
+bind-key -T copy-mode-vi TripleClick1Pane select-pane \; send-keys -X select-line \; run-shell -d 0.3 \; send-keys -X copy-pipe-no-clear pbcopy
+run-shell -b 'sleep 1; tmux bind-key -T copy-mode-vi y send-keys -X copy-pipe-no-clear pbcopy; tmux bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-no-clear pbcopy; tmux bind-key -T copy-mode-vi C-j send-keys -X copy-pipe-no-clear pbcopy; tmux bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-no-clear pbcopy; tmux bind-key -T copy-mode-vi DoubleClick1Pane "select-pane ; send-keys -X select-word ; run-shell -d 0.3 ; send-keys -X copy-pipe-no-clear pbcopy"; tmux bind-key -T copy-mode-vi TripleClick1Pane "select-pane ; send-keys -X select-line ; run-shell -d 0.3 ; send-keys -X copy-pipe-no-clear pbcopy"'
+
 # replace C-b by C-a instead of using both prefixes
 # set -gu prefix2
 # unbind C-a
