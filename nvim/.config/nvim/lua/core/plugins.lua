@@ -68,6 +68,18 @@ local plugins = {
       { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
 	},
+	{
+		"echasnovski/mini.cursorword",
+		version = false,
+		config = function()
+			require("mini.cursorword").setup({
+				delay = 100,
+			})
+
+			vim.api.nvim_set_hl(0, "MiniCursorword", { underline = true })
+			vim.api.nvim_set_hl(0, "MiniCursorwordCurrent", { underline = true })
+		end,
+	},
 	-- {
 	-- 	"echasnovski/mini.nvim",
 	-- 	version = "*",
