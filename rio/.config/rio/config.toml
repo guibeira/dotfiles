@@ -1,8 +1,11 @@
+[effects]
+trail-cursor = true
+
 [cursor]
-# shape = 'beam'
-# blinking-interval = 800
-# blinking-cursor = true
-trail-cursor=false
+blinking = true
+shape = 'block'
+blinking-interval = 800
+blinking-cursor = true
 
 [colors]
 background = '#1e1e2e'
@@ -60,8 +63,8 @@ width = 1920
 height = 1080
 mode = "Windowed"
 #opacity = 0.5
-opacity = 0.5
-blur = true
+opacity = 1.0
+blur = false
 #decorations = "Transparent"
 #decorations = "Buttonless"
-#decorations = "Disabled"
+decorations = "Disabled"
