@@ -1,8 +1,10 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export III_TELEMETRY_ENABLED=false
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -73,7 +75,6 @@ ZSH_THEME="agnoster"
 plugins=(
 	git
   zsh-autosuggestions
-	zsh-syntax-highlighting
 	asdf
 )
 
@@ -104,9 +105,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# asdf config
-. $HOME/.asdf/asdf.sh
 
 # atuin config
 eval "$(atuin init zsh)"
@@ -227,3 +225,6 @@ export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
 
 # Added by Antigravity
 export PATH="/Users/doggao/.antigravity/antigravity/bin:$PATH"
+source /home/doggao/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
