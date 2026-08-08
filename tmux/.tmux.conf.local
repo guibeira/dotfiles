@@ -401,11 +401,8 @@ tmux_conf_uninstall_plugins_on_reload=true
 set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @plugin 'noscript/tmux-mighty-scroll'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @continuum-restore 'on'
-set -g @resurrect-processes 'nv'
-set -g @resurrect-strategy-nvim 'session'
-set -g @resurrect-strategy-nvim 'session'
+set -g @resurrect-processes '"~bin/nvim->nvim" "codex->codex --yolo -c model_reasoning_summary_format=experimental --search resume --last" "claude->claude --dangerously-skip-permissions --continue"'
 set -g @plugin 'nhdaly/tmux-better-mouse-mode'
 
 # ~/.tmux.conf
@@ -420,6 +417,7 @@ set -g @tmux-gruvbox 'dark256' # or 'dark256', 'light', 'light256'
 set -g @tmux-gruvbox-right-status-x '%d.%m.%Y' # e.g.: 30.01.2024
 # display hostname and enhance section with other plugin
 set -g @tmux-gruvbox-right-status-z '#(dolar 2>/dev/null; sleep 900) #{tmux_mode_indicator}'
+set -g @plugin 'tmux-plugins/tmux-continuum'
 
 # -- custom variables ----------------------------------------------------------
 
