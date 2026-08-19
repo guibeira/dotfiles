@@ -32,4 +32,10 @@ vim.opt.ignorecase = true
 
 -- spell check
 vim.opt.spell = true
-vim.opt.spelllang = "en_us"
+vim.api.nvim_create_autocmd("VimEnter", {
+	nested = true,
+	once = true,
+	callback = function()
+		vim.opt.spelllang = { "pt_br", "en_us" }
+	end,
+})

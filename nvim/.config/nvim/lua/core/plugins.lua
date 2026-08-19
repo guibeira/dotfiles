@@ -535,6 +535,35 @@ local plugins = {
     opts = {},
     config = function(_, opts)
       require("codex").setup(opts)
+
+      local group = vim.api.nvim_create_augroup("CodexDisableSpell", { clear = true })
+      local function update_spell(bufnr)
+        vim.schedule(function()
+          if not vim.api.nvim_buf_is_valid(bufnr) then
+            return
+          end
+
+          local is_codex = vim.b[bufnr].codex_terminal ~= nil
+          for _, winid in ipairs(vim.fn.win_findbuf(bufnr)) do
+            if is_codex then
+              if vim.w[winid].codex_previous_spell == nil then
+                vim.w[winid].codex_previous_spell = vim.wo[winid].spell
+              end
+              vim.wo[winid].spell = false
+            elseif vim.w[winid].codex_previous_spell ~= nil then
+              vim.wo[winid].spell = vim.w[winid].codex_previous_spell
+              vim.w[winid].codex_previous_spell = nil
+            end
+          end
+        end)
+      end
+
+      vim.api.nvim_create_autocmd({ "TermOpen", "BufWinEnter" }, {
+        group = group,
+        callback = function(event)
+          update_spell(event.buf)
+        end,
+      })
     end,
   },
   {
