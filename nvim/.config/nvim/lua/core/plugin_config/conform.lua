@@ -1,4 +1,9 @@
 require("conform").setup({
+	format_on_save = function(bufnr)
+		if vim.bo[bufnr].filetype == "rust" then
+			return { timeout_ms = 500, lsp_format = "fallback" }
+		end
+	end,
 	formatters_by_ft = {
 		lua = { "stylua" },
 		-- Conform will run multiple formatters sequentially

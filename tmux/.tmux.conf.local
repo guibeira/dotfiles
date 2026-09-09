@@ -407,6 +407,10 @@ set -g @plugin 'nhdaly/tmux-better-mouse-mode'
 
 # ~/.tmux.conf
 
+# Use LANG for character encoding. Some terminals export the invalid
+# LC_CTYPE=UTF-8 value, which makes Perl print locale warnings.
+set-environment -gu LC_CTYPE
+
 set -g @plugin 'tmux-plugins/tpm' # mandatory
 set -g @plugin 'tmux-plugins/tmux-sensible' # optional recommended
 
